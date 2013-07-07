@@ -1,0 +1,222 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use 5.12.0;
+
+use DateTime;
+use DateTime::Duration;
+use DateTime::Format::Strptime;
+use Getopt::Long qw( GetOptions );
+
+my %opt = (
+    help => 0,
+    statefile => '/tmp/checkshutdown.state',
+    syslog => 0,
+);
+
+my %check_table = (
+
+    apache => {
+        help => 'Check for recent apache requests',
+        code => sub {
+            my $last_access = last_apache_access('/var/log/apache2/access.log');
+            return unless defined $last_access;
+            my $now = DateTime->now->epoch;
+            my $age = $now - $last_access->epoch;
+            my $max_age = 3 * 60;
+            if ($age < $max_age) {
+                return "Apache access $age seconds ago within $max_age seconds";
+            }
+            return;
+        },
+    },
+
+    console_user => {
+        help => 'Check is a user is logged in at the console',
+        code => sub {
+            return 'console user is active'
+                unless grep { /mythwelcome/ } `ps ax`;
+            return;
+        },
+    },
+
+    mythshutdown => {
+        help => 'Check if MythTV is busy',
+        code => sub {
+            my $exit = system(qw( mythshutdown --status ));
+            return sprintf('mythshutdown status 0x%02x', $exit >> 8)
+                if $exit > 0;
+            return; # 0 = shutdown ok, -1 = didn't run
+        },
+    },
+
+    sabnzbd => {
+        help => 'Check if SABnzbd is busy',
+        code => sub {
+            use JSON::XS qw( decode_json );
+
+            my $host = 'localhost';
+            my $port = 8080;
+            my $key = 'b46d9626617568fadbbcbd07220feb56';
+            my $uri = "http://$host:$port/sabnzbd/api?mode=queue\\&output=json\\&apikey=$key";
+
+            my $sab = eval { decode_json(`curl -s $uri`)->{queue} };
+            #die("curl $uri failed: $@") unless $sab;
+
+            return "SABnzbd is busy"
+                if $sab && ($sab->{status} eq 'Downloading');
+            return;
+        },
+    },
+
+    ssh_sessions => {
+        help => 'Check for users logged in by ssh',
+        code => sub {
+            my $active_ssh_sessions =
+                scalar grep { /:ssh$/ }
+                       map { [ split ]->[3] }
+                       `netstat --inet --numeric-hosts`;
+            return "$active_ssh_sessions active ssh sessions"
+                if $active_ssh_sessions;
+            return;
+        },
+    },
+
+    xbmc => {
+        help => 'Check if XBMC is running',
+        code => sub {
+            return 'XBMC is running'
+                if grep { m</usr/bin/xbmc> } `ps ax`;
+            return;
+        },
+    },
+
+    uptime => {
+        help => 'Check is system has been up long enough',
+        code => sub {
+            my $minimum_minutes = 5;
+            open(my $fh, '<', '/proc/uptime') or return;
+            my $line = <$fh>;
+            my ($uptime) = split(/\s+/, $line);
+            return "up for less than $minimum_minutes minutes"
+                unless $uptime > $minimum_minutes * 60;
+            return;
+        },
+    },
+
+);
+
+# my @default_checks = qw(
+#     apache
+#     console_user
+#     mythshutdown
+#     sabnzbd
+#     ssh_sessions
+#     uptime
+#     xbmc
+# );
+
+my @default_checks = qw(
+    mythshutdown
+    sabnzbd
+    ssh_sessions
+);
+
+my $opt_ok = GetOptions(
+    'help|h|?' => \$opt{help},
+    'syslog|s' => \$opt{syslog},
+);
+
+if ($opt{help} || !$opt_ok) {
+    usage();
+}
+
+exit main(@ARGV);
+
+sub main {
+    my @checks = @_ ? @_ : @default_checks;
+    my $ok_to_shutdown = 1;
+    my @msgs;
+
+    for my $name (@checks) {
+        my $check = $check_table{$name};
+        if (!$check) {
+            diag("Unknown check: $name");
+            next;
+        }
+        my $msg = $check->{code}->();
+        $ok_to_shutdown = 0 if $msg;
+        push(@msgs, $msg) if $msg;
+        $msg ||= 'OK';
+        # logit(sprintf("%-16s$msg", "$name")) unless $opt{syslog};
+    }
+    if ($opt{syslog}) {
+        my $prev_state = load_state();
+        my $new_state = $ok_to_shutdown ? 'all clear for shutdown' : 'busy: ' . join(', ', @msgs);
+        if ($prev_state ne $new_state) {
+            # logit($new_state);
+            save_state($new_state);
+        }
+    }
+    else {
+        # logit($ok_to_shutdown ? 'all clear for shutdown' : 'not shutting down');
+    }
+    return $ok_to_shutdown ? 0 : 1;
+}
+
+sub usage {
+    my $msg = "usage: $0 [--syslog] [check [checks...]]\n\nchecks:\n";
+    for my $name (sort keys %check_table) {
+        my $check = $check_table{$name};
+        $msg .= sprintf"\t%-16s%s\n", $name, $check->{help};
+    }
+    die $msg;
+}
+
+sub diag {
+    logit('info: ', @_);
+    return;
+}
+
+sub load_state {
+    open(my $fh, '<', $opt{statefile}) or return "";
+    my $state = <$fh> || "";
+    chomp $state;
+    return $state;
+}
+
+sub save_state {
+    my ($state) = @_;
+    open(my $fh, '>', $opt{statefile}) or return;
+    print {$fh} $state, "\n";
+}
+
+sub logit {
+    if ($opt{syslog}) {
+        system(qw( logger -p local0.info -t ), "checkshutdown[$$]", @_);
+    }
+    else {
+        say join(' ', @_);
+    }
+}
+
+sub last_apache_access {
+    my ($filename) = @_;
+    open my $fh, '<', $filename or (
+        warn("Opening $filename: $!"), return
+    );
+
+    # 23/Sep/2012:14:54:34 +1000
+    use DateTime::Format::Strptime;
+    my $parser = DateTime::Format::Strptime->new(
+            pattern   => '%e/%b/%Y:%H:%M:%S %z',
+        );
+
+    my $dt;
+    while (<$fh>) {
+        $dt = $1 if /\[(.*?)\]/;
+    }
+    return unless defined $dt;
+    return $parser->parse_datetime($dt);
+}
