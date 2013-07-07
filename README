@@ -1,0 +1,10 @@
+## Various scripts for a combined MythTV/XBMC box to make it all run smoothly...
+
+### checkshutdown
+This script is based on the checkshutdown script found here:
+https://github.com/sdt/mythtv-scripts
+
+I have modified it slightly so it works when XBMC is used as a MythTV frontend.  It's called (via mythshutdownstatus) from this xbmc addon to manage powersaving, wake for record etc:https://github.com/ta264/service.mythtv.powersave
+
+### mythshutdownstatus
+A cludge to run checkshutdown and echo the output to stdout so that it can be read by XBMC.  Could probably merge with checkshutdown...
