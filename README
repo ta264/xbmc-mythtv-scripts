@@ -8,3 +8,6 @@ I have modified it slightly so it works when XBMC is used as a MythTV frontend. 
 
 ### mythshutdownstatus
 A cludge to run checkshutdown and echo the output to stdout so that it can be read by XBMC.  Could probably merge with checkshutdown...
+
+### powerbtn.sh
+Rename existing /etc/acpi/powerbtn.sh to /etc/acpi/powerbtn.sh.orig.  This version checks mythshutdownstatus and if it likes the answer it will run the existing shutdown script.
