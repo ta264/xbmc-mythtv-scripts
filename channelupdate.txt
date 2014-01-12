@@ -101,3 +101,9 @@ UPDATE channel SET channum=603, visible=1, xmltvid='popfun.co.uk' WHERE servicei
 UPDATE channel SET channum=604, visible=1 WHERE serviceid = 53360;
 UPDATE channel SET channum=605, visible=1, xmltvid='tinypop.com' WHERE serviceid = 53330;
 UPDATE channel SET channum=606, visible=1 WHERE serviceid = 53350;
+
+## delete unwanted channels
+DELETE from channel where visible = 0;
+
+## turn off commercial flagging for BBC channels
+UPDATE channel set commmethod=-2 WHERE name LIKE '%BBC%' OR name LIKE 'CBeebies%';
