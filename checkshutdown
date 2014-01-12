@@ -56,16 +56,25 @@ my %check_table = (
         code => sub {
             use JSON::XS qw( decode_json );
 
-            my $host = 'localhost';
-            my $port = 8080;
+            my $host = 'ta264.no-ip.org';
+            my $port = 80;
             my $key = 'b46d9626617568fadbbcbd07220feb56';
-            my $uri = "http://$host:$port/sabnzbd/api?mode=queue\\&output=json\\&apikey=$key";
 
-            my $sab = eval { decode_json(`curl -s $uri`)->{queue} };
+            my $uri_queue = "http://$host:$port/sabnzbd/api?mode=queue\\&output=json\\&apikey=$key";
+            my $sab_queue = eval { decode_json(`curl -s $uri_queue`)->{queue} };
             #die("curl $uri failed: $@") unless $sab;
 
-            return "SABnzbd is busy"
-                if $sab && ($sab->{status} eq 'Downloading');
+	    my $uri_history = "http://$host:$port/sabnzbd/api?mode=history\\&output=json\\&apikey=$key";
+	    my $sab_history = eval { decode_json(`curl -s $uri_history`)->{history} };
+	    
+	    my $last_status = "Completed";
+	    if ($sab_history && $sab_history->{noofslots} > 0) {
+		$last_status = $sab_history->{slots}[1]->{status};
+	    }
+
+	    my $sab_busy = ($sab_queue && ($sab_queue->{status} eq 'Downloading')) || ($last_status ne 'Completed');
+
+            return "SABnzbd is busy" if $sab_busy;
             return;
         },
     },
