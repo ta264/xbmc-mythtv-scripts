@@ -69,7 +69,7 @@ my %check_table = (
 	    
 	    my $last_status = "Completed";
 	    if ($sab_history && $sab_history->{noofslots} > 0) {
-		$last_status = $sab_history->{slots}[1]->{status};
+		$last_status = $sab_history->{slots}[0]->{status};
 	    }
 
 	    my @last_status_ok = qw(Completed Failed);
