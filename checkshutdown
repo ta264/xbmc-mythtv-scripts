@@ -44,7 +44,7 @@ my %check_table = (
     mythshutdown => {
         help => 'Check if MythTV is busy',
         code => sub {
-            my $exit = system(qw( mythshutdown --status ));
+            my $exit = system(qw( mythshutdown -q --status ));
             return sprintf('mythshutdown status 0x%02x', $exit >> 8)
                 if $exit > 0;
             return; # 0 = shutdown ok, -1 = didn't run
