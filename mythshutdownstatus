@@ -1,7 +1,0 @@
-#/!bin/bash
-
-#code to output mythshutdown exit code status to stdout
-
-# mythshutdown -s
-checkshutdown
-echo $?
