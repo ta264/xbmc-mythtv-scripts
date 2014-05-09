@@ -86,7 +86,7 @@ my %check_table = (
         help => 'Check for users logged in by ssh',
         code => sub {
             my $active_ssh_sessions =
-                scalar grep { /:ssh$/ }
+                scalar grep { /:2222$/ }
                        map { [ split ]->[3] }
                        `netstat --inet --numeric-hosts`;
             return "$active_ssh_sessions active ssh sessions"
