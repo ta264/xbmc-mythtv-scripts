@@ -104,7 +104,6 @@ UPDATE channel SET channum=606, visible=1 WHERE serviceid = 53350;
 
 ## BBC red button services
 UPDATE channel SET channum=981, visible=1 WHERE serviceid = 6390;
-UPDATE channel SET channum=982, visible=1 WHERE serviceid = 54190;
 
 ## delete unwanted channels
 DELETE from channel where visible = 0;
