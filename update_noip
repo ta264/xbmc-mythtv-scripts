@@ -1,0 +1,8 @@
+#!/bin/bash
+
+## Update no-ip with 8.8.8.8 before resetting to current ip.
+## Prevents the monthly 'no activity' email from no-ip if 
+## ip address doesn't change for a month
+ddclient -daemon=0 -use=ip -ip=8.8.8.8
+sleep 45
+ddclient -daemon=0
