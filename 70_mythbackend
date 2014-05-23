@@ -1,0 +1,14 @@
+#!/bin/sh
+
+case "${1}" in
+  hibernate|suspend)
+    # /etc/init.d/mythtv-backend stop
+    service mythtv-backend stop
+        ;;
+  resume|thaw)
+    # /etc/init.d/mythtv-backend start
+    service mythtv-backend start
+        ;;
+  *)
+    ;;
+esac
