@@ -51,6 +51,16 @@ my %check_table = (
         },
     },
 
+    checklivetv => {
+	help => 'Check if someone is watching live TV',
+	code => sub {
+	    my $output = `checklivetv`;
+	    return 'live TV playback in progress'
+		if $output eq "recording\n";
+	    return;
+	},
+    },
+
     sabnzbd => {
         help => 'Check if SABnzbd is busy',
         code => sub {
@@ -128,6 +138,7 @@ my %check_table = (
 
 my @default_checks = qw(
     mythshutdown
+    checklivetv
     sabnzbd
     ssh_sessions
 );
