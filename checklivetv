@@ -1,0 +1,16 @@
+#!/usr/bin/python
+import MythTV
+
+backend = MythTV.MythBE()
+allRecorders = backend.getRecorderList()
+freeRecorders = backend.getFreeRecorderList()
+
+if set(allRecorders) == set(freeRecorders):
+    print("not recording")
+else:
+    print("recording")
+
+
+
+
+
