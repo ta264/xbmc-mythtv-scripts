@@ -1,0 +1,5 @@
+<advancedsettings>
+  <splash>false</splash>
+  <gputempcommand>echo "$(nvidia-smi -q -d TEMPERATURE | grep Gpu | cut -c35-36) C"</gputempcommand>
+  <cputempcommand>sensors|sed -ne "s/temp1: \+[-+]\([0-9]\+\).*/\1 C/p"</cputempcommand>
+</advancedsettings>

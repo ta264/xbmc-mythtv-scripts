@@ -11,3 +11,6 @@ Rename existing /etc/acpi/powerbtn.sh to /etc/acpi/powerbtn.sh.orig.  This versi
 
 ### 70_mythbackend
 This is a script for power manangement (sudo apt-get install pm-utils) to workaround dodgy dvb drivers which break on suspend.  Place in /etc/pm/sleep.d to shut down mythbackend when sleeping.  Add SUSPEND_MODULES="cx23885" to /etc/pm/config.d/config to unload the dvb modules on sleep which fixes the problem.
+
+### advancedsettings.xml
+lives in ~/.xbmc/userdata.  Currently just has settings for cpu and gpu temperature.
