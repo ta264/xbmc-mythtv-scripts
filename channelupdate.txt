@@ -8,7 +8,7 @@ update channel SET visible = FALSE;
 
 UPDATE channel SET channum=101, visible=1, xmltvid='hd.bbc1.bbc.co.uk' WHERE serviceid = 6941;
 UPDATE channel SET channum=102, visible=1, xmltvid='hd.bbc2.bbc.co.uk' WHERE serviceid = 6940;
-UPDATE channel SET channum=103, visible=1, xmltvid='hd.london-macro.itv1.itv.co.uk' WHERE serviceid = 10000;
+UPDATE channel SET channum=103, visible=1, xmltvid='hd.london-macro.itv1.itv.co.uk' WHERE serviceid = 21000;
 UPDATE channel SET channum=104, visible=1, xmltvid='hd.channel4.com' WHERE serviceid = 21200;
 UPDATE channel SET channum=105, visible=1, xmltvid='channel5.co.uk' WHERE serviceid = 7701;
 UPDATE channel SET channum=106, visible=1, xmltvid='hd.bbcthree.bbc.co.uk' WHERE serviceid = 6951;
@@ -33,8 +33,8 @@ UPDATE channel SET channum=127, visible=1, xmltvid='4seven.channel4.com' WHERE s
 UPDATE channel SET channum=128, visible=1, xmltvid='tsod.plus-1.channel5.co.uk' WHERE serviceid = 7720;
 UPDATE channel SET channum=129, visible=1, xmltvid='fiveusa.channel5.co.uk' WHERE serviceid = 7710;
 UPDATE channel SET channum=130, visible=1, xmltvid='tsod.plus-1.fiveusa.channel5.co.uk' WHERE serviceid = 7711;
-UPDATE channel SET channum=131, visible=1, xmltvid='fiveusa.channel5.co.uk' WHERE serviceid = 7710;
-UPDATE channel SET channum=132, visible=1, xmltvid='tsod.plus-1.fiveusa.channel5.co.uk' WHERE serviceid = 7711;
+UPDATE channel SET channum=131, visible=1, xmltvid='fiver.channel5.co.uk' WHERE serviceid = 17715;
+UPDATE channel SET channum=132, visible=1, xmltvid='' WHERE serviceid = 17716;
 UPDATE channel SET channum=134, visible=1, xmltvid='drama.cbs.com' WHERE serviceid = 50903;
 UPDATE channel SET channum=135, visible=1, xmltvid='reality.cbs.com' WHERE serviceid = 53275;
 UPDATE channel SET channum=136, visible=1, xmltvid='tsod.plus-1.reality.cbs.com' WHERE serviceid = 52102;
@@ -46,7 +46,7 @@ UPDATE channel SET channum=141, visible=1, xmltvid='plus-1.international.bet.com
 UPDATE channel SET channum=142, visible=1, xmltvid='entertainment.truemovies.tv' WHERE serviceid = 53375;
 UPDATE channel SET channum=143, visible=1 WHERE serviceid = 54110;
 UPDATE channel SET channum=144, visible=1, xmltvid='sky-three.sky.com' WHERE serviceid = 5109;
-UPDATE channel SET channum=145, visible=1, xmltvid='challengetv.co.uk' WHERE serviceid = 6031;
+UPDATE channel SET channum=145, visible=1, xmltvid='challengetv.co.uk' WHERE serviceid = 16032;
 UPDATE channel SET channum=146, visible=1, xmltvid='uk.viva.tv' WHERE serviceid = 7009;
 UPDATE channel SET channum=200, visible=1, xmltvid='news.bbc.co.uk' WHERE serviceid = 8921;
 UPDATE channel SET channum=201, visible=1, xmltvid='parliament.bbc.co.uk' WHERE serviceid = 10307;
@@ -106,7 +106,7 @@ UPDATE channel SET channum=606, visible=1 WHERE serviceid = 53350;
 UPDATE channel SET channum=981, visible=1 WHERE serviceid = 6390;
 
 ## delete unwanted channels
-DELETE from channel where visible = 0;
+##DELETE from channel where visible = 0;
 
 ## turn off commercial flagging for BBC channels
 UPDATE channel set commmethod=-2 WHERE name LIKE '%BBC%' OR name LIKE 'CBeebies%';
