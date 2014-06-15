@@ -5,6 +5,7 @@ use mythconverg;
 ## making it easy to troubleshoot missing channels
 update channel SET channum=channum+10000, visible=FALSE WHERE channum<100000;
 update channel SET visible = FALSE;
+update channel SET useonairguide = 0;
 
 UPDATE channel SET channum=101, visible=1, xmltvid='hd.bbc1.bbc.co.uk' WHERE serviceid = 6941;
 UPDATE channel SET channum=102, visible=1, xmltvid='hd.bbc2.bbc.co.uk' WHERE serviceid = 6940;
@@ -104,6 +105,9 @@ UPDATE channel SET channum=606, visible=1 WHERE serviceid = 53350;
 
 ## BBC red button services
 UPDATE channel SET channum=981, visible=1 WHERE serviceid = 6390;
+
+## Use EIT if we haven't set an xmltvid
+UPDATE channel SET useonairguide = 1 WHERE visible = 1 AND xmltvid = '';
 
 ## delete unwanted channels
 ##DELETE from channel where visible = 0;
