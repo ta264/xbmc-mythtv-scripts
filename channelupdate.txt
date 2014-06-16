@@ -46,7 +46,7 @@ UPDATE channel SET channum=141, visible=1, xmltvid='' WHERE serviceid = 51082;
 UPDATE channel SET channum=142, visible=1, xmltvid='entertainment.truemovies.tv' WHERE serviceid = 53375;
 UPDATE channel SET channum=143, visible=1 WHERE serviceid = 54110;
 UPDATE channel SET channum=144, visible=1, xmltvid='sky-three.sky.com' WHERE serviceid = 5109;
-UPDATE channel SET channum=145, visible=1, xmltvid='challengetv.co.uk' WHERE serviceid = 16032;
+UPDATE channel SET channum=145, visible=1, xmltvid='challengetv.co.uk' WHERE serviceid = 6032;
 UPDATE channel SET channum=146, visible=1, xmltvid='uk.viva.tv' WHERE serviceid = 7009;
 UPDATE channel SET channum=200, visible=1, xmltvid='news.bbc.co.uk' WHERE serviceid = 8921;
 UPDATE channel SET channum=201, visible=1, xmltvid='parliament.bbc.co.uk' WHERE serviceid = 10307;
