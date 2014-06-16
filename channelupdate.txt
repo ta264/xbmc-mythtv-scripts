@@ -4,8 +4,7 @@ use mythconverg;
 ## un-matched channels will stay at very high channel numbers
 ## making it easy to troubleshoot missing channels
 update channel SET channum=channum+10000, visible=FALSE WHERE channum<100000;
-update channel SET visible = FALSE;
-update channel SET useonairguide = 0;
+update channel SET visible = FALSE, useonairguide = 0, xmltvid='';
 
 UPDATE channel SET channum=101, visible=1, xmltvid='hd.bbc1.bbc.co.uk' WHERE serviceid = 6941;
 UPDATE channel SET channum=102, visible=1, xmltvid='hd.bbc2.bbc.co.uk' WHERE serviceid = 6940;
@@ -42,8 +41,8 @@ UPDATE channel SET channum=136, visible=1, xmltvid='tsod.plus-1.reality.cbs.com'
 UPDATE channel SET channum=137, visible=1, xmltvid='action.cbs.com' WHERE serviceid = 52007;
 UPDATE channel SET channum=138, visible=1, xmltvid='horror.cbs.com' WHERE serviceid = 52105;
 UPDATE channel SET channum=139, visible=1, xmltvid='tsod.plus-1.horror.cbs.com' WHERE serviceid = 52002;
-UPDATE channel SET channum=140, visible=1, xmltvid='international.bet.com' WHERE serviceid = 51081;
-UPDATE channel SET channum=141, visible=1, xmltvid='plus-1.international.bet.com' WHERE serviceid = 51082;
+UPDATE channel SET channum=140, visible=1, xmltvid='' WHERE serviceid = 51081;
+UPDATE channel SET channum=141, visible=1, xmltvid='' WHERE serviceid = 51082;
 UPDATE channel SET channum=142, visible=1, xmltvid='entertainment.truemovies.tv' WHERE serviceid = 53375;
 UPDATE channel SET channum=143, visible=1 WHERE serviceid = 54110;
 UPDATE channel SET channum=144, visible=1, xmltvid='sky-three.sky.com' WHERE serviceid = 5109;
@@ -53,7 +52,7 @@ UPDATE channel SET channum=200, visible=1, xmltvid='news.bbc.co.uk' WHERE servic
 UPDATE channel SET channum=201, visible=1, xmltvid='parliament.bbc.co.uk' WHERE serviceid = 10307;
 UPDATE channel SET channum=202, visible=1, xmltvid='sky-news.sky.com' WHERE serviceid = 4706;
 UPDATE channel SET channum=203, visible=1, xmltvid='aljazeera.net' WHERE serviceid = 51107;
-UPDATE channel SET channum=204, visible=1, xmltvid='euronews.com' WHERE serviceid = 54224;
+UPDATE channel SET channum=204, visible=1 WHERE serviceid = 54224;
 UPDATE channel SET channum=205, visible=1 WHERE serviceid = 52570;
 UPDATE channel SET channum=206, visible=1 WHERE serviceid = 53148;
 UPDATE channel SET channum=207, visible=1, xmltvid='europe.cnn.com' WHERE serviceid = 7140;
@@ -91,7 +90,7 @@ UPDATE channel SET channum=516, visible=1 WHERE serviceid = 55111;
 UPDATE channel SET channum=517, visible=1 WHERE serviceid = 55112;
 UPDATE channel SET channum=518, visible=1, xmltvid='kiss-tv.kiss100.com' WHERE serviceid = 12010;
 UPDATE channel SET channum=519, visible=1, xmltvid='thebox.co.uk' WHERE serviceid = 12005;
-UPDATE channel SET channum=520, visible=1, xmltvid='tsod.plus-1.international.bet.com' WHERE serviceid = 52060;
+UPDATE channel SET channum=520, visible=1, xmltvid='' WHERE serviceid = 52060;
 UPDATE channel SET channum=521, visible=1, xmltvid='smashhits.net' WHERE serviceid = 12020;
 UPDATE channel SET channum=523, visible=1, xmltvid='magictv.co.uk' WHERE serviceid = 52065;
 UPDATE channel SET channum=524, visible=1, xmltvid='kerrang.com' WHERE serviceid = 12015;
@@ -104,7 +103,7 @@ UPDATE channel SET channum=605, visible=1, xmltvid='tinypop.com' WHERE serviceid
 UPDATE channel SET channum=606, visible=1 WHERE serviceid = 53350;
 
 ## BBC red button services
-UPDATE channel SET channum=981, visible=1 WHERE serviceid = 6390;
+UPDATE channel SET channum=981, visible=1 WHERE serviceid = 22101;
 
 ## Use EIT if we haven't set an xmltvid
 UPDATE channel SET useonairguide = 1 WHERE visible = 1 AND xmltvid = '';
