@@ -81,7 +81,7 @@ UPDATE channel SET channum=501, visible=1 WHERE serviceid = 53355;
 UPDATE channel SET channum=502, visible=1 WHERE serviceid = 53300;
 UPDATE channel SET channum=503, visible=1 WHERE serviceid = 53315;
 UPDATE channel SET channum=504, visible=1 WHERE serviceid = 52135;
-UPDATE channel SET channum=505, visible=1 WHERE serviceid = 53335;
+UPDATE channel SET channum=505, visible=1 WHERE serviceid = 55202;
 UPDATE channel SET channum=506, visible=1, xmltvid='bliss.co.uk' WHERE serviceid = 53305;
 UPDATE channel SET channum=509, visible=1 WHERE serviceid = 50470;
 UPDATE channel SET channum=510, visible=1 WHERE serviceid = 55113;
