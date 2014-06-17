@@ -51,7 +51,7 @@ UPDATE channel SET channum=146, visible=1, xmltvid='uk.viva.tv' WHERE serviceid 
 UPDATE channel SET channum=149, visible=1, xmltvid='foodnetwork.com' WHERE serviceid = 53260;
 UPDATE channel SET channum=150, visible=1, xmltvid='sat.travelchannel.co.uk' WHERE serviceid = 54102;
 UPDATE channel SET channum=151, visible=1, xmltvid='tsod.plus-1.foodnetwork.com' WHERE serviceid = 53270;
-UPDATE channel SET channum=200, visible=1, xmltvid='news.bbc.co.uk' WHERE serviceid = 8921;
+UPDATE channel SET channum=200, visible=1, xmltvid='hd.news.bbc.co.uk' WHERE serviceid = 8921;
 UPDATE channel SET channum=201, visible=1, xmltvid='parliament.bbc.co.uk' WHERE serviceid = 10307;
 UPDATE channel SET channum=202, visible=1, xmltvid='sky-news.sky.com' WHERE serviceid = 4706;
 UPDATE channel SET channum=203, visible=1, xmltvid='aljazeera.net' WHERE serviceid = 51107;
@@ -63,6 +63,7 @@ UPDATE channel SET channum=208, visible=1, xmltvid='bloomberg.com' WHERE service
 UPDATE channel SET channum=209, visible=1, xmltvid='hd.world.nhk.or.jp' WHERE serviceid = 53147;
 UPDATE channel SET channum=210, visible=1, xmltvid='europe.cnbc.com' WHERE serviceid = 50882;
 UPDATE channel SET channum=211, visible=1 WHERE serviceid = 54216;
+UPDATE channel SET channum=212, visible=1, xmltvid='news.bbc.co.uk' WHERE serviceid = 10358;
 UPDATE channel SET channum=300, visible=1, xmltvid='filmfour.channel4.com' WHERE serviceid = 9220;
 UPDATE channel SET channum=301, visible=1, xmltvid='tsod.plus-1.filmfour.channel4.com' WHERE serviceid = 9225;
 UPDATE channel SET channum=302, visible=1, xmltvid='1.truemovies.tv' WHERE serviceid = 53320;
@@ -72,7 +73,6 @@ UPDATE channel SET channum=305, visible=1, xmltvid='tsod.plus-1.1.movies4men.co.
 UPDATE channel SET channum=400, visible=1 WHERE serviceid = 53280;
 UPDATE channel SET channum=401, visible=1 WHERE serviceid = 53230;
 UPDATE channel SET channum=402, visible=1 WHERE serviceid = 53285;
-
 UPDATE channel SET channum=408, visible=1, xmltvid='theactivechannel.com' WHERE serviceid = 55330;
 UPDATE channel SET channum=409, visible=1 WHERE serviceid = 55236;
 UPDATE channel SET channum=410, visible=1 WHERE serviceid = 52016;
