@@ -48,6 +48,9 @@ UPDATE channel SET channum=143, visible=1 WHERE serviceid = 54110;
 UPDATE channel SET channum=144, visible=1, xmltvid='sky-three.sky.com' WHERE serviceid = 5109;
 UPDATE channel SET channum=145, visible=1, xmltvid='challengetv.co.uk' WHERE serviceid = 6032;
 UPDATE channel SET channum=146, visible=1, xmltvid='uk.viva.tv' WHERE serviceid = 7009;
+UPDATE channel SET channum=149, visible=1, xmltvid='foodnetwork.com' WHERE serviceid = 53260;
+UPDATE channel SET channum=150, visible=1, xmltvid='sat.travelchannel.co.uk' WHERE serviceid = 54102;
+UPDATE channel SET channum=151, visible=1, xmltvid='tsod.plus-1.foodnetwork.com' WHERE serviceid = 53270;
 UPDATE channel SET channum=200, visible=1, xmltvid='news.bbc.co.uk' WHERE serviceid = 8921;
 UPDATE channel SET channum=201, visible=1, xmltvid='parliament.bbc.co.uk' WHERE serviceid = 10307;
 UPDATE channel SET channum=202, visible=1, xmltvid='sky-news.sky.com' WHERE serviceid = 4706;
@@ -69,9 +72,7 @@ UPDATE channel SET channum=305, visible=1, xmltvid='tsod.plus-1.1.movies4men.co.
 UPDATE channel SET channum=400, visible=1 WHERE serviceid = 53280;
 UPDATE channel SET channum=401, visible=1 WHERE serviceid = 53230;
 UPDATE channel SET channum=402, visible=1 WHERE serviceid = 53285;
-UPDATE channel SET channum=403, visible=1, xmltvid='foodnetwork.com' WHERE serviceid = 53260;
-UPDATE channel SET channum=404, visible=1, xmltvid='tsod.plus-1.foodnetwork.com' WHERE serviceid = 53270;
-UPDATE channel SET channum=405, visible=1, xmltvid='sat.travelchannel.co.uk' WHERE serviceid = 54102;
+
 UPDATE channel SET channum=408, visible=1, xmltvid='theactivechannel.com' WHERE serviceid = 55330;
 UPDATE channel SET channum=409, visible=1 WHERE serviceid = 55236;
 UPDATE channel SET channum=410, visible=1 WHERE serviceid = 52016;
