@@ -74,6 +74,7 @@ UPDATE channel SET channum=404, visible=1, xmltvid='tsod.plus-1.foodnetwork.com'
 UPDATE channel SET channum=405, visible=1, xmltvid='sat.travelchannel.co.uk' WHERE serviceid = 54102;
 UPDATE channel SET channum=408, visible=1, xmltvid='theactivechannel.com' WHERE serviceid = 55330;
 UPDATE channel SET channum=409, visible=1 WHERE serviceid = 55236;
+UPDATE channel SET channum=410, visible=1 WHERE serviceid = 52016;
 UPDATE channel SET channum=500, visible=1, xmltvid='chartshow.com' WHERE serviceid = 53365;
 UPDATE channel SET channum=501, visible=1 WHERE serviceid = 53355;
 UPDATE channel SET channum=502, visible=1 WHERE serviceid = 53300;
