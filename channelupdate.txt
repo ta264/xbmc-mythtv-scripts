@@ -33,7 +33,7 @@ UPDATE channel SET channum=127, visible=1, xmltvid='4seven.channel4.com' WHERE s
 UPDATE channel SET channum=128, visible=1, xmltvid='tsod.plus-1.channel5.co.uk' WHERE serviceid = 7720;
 UPDATE channel SET channum=129, visible=1, xmltvid='fiveusa.channel5.co.uk' WHERE serviceid = 7710;
 UPDATE channel SET channum=130, visible=1, xmltvid='tsod.plus-1.fiveusa.channel5.co.uk' WHERE serviceid = 7711;
-UPDATE channel SET channum=131, visible=1, xmltvid='fiver.channel5.co.uk' WHERE serviceid = 7715;
+UPDATE channel SET channum=131, visible=1 WHERE serviceid = 7715;
 UPDATE channel SET channum=132, visible=1, xmltvid='' WHERE serviceid = 7716;
 UPDATE channel SET channum=134, visible=1, xmltvid='drama.cbs.com' WHERE serviceid = 50903;
 UPDATE channel SET channum=135, visible=1, xmltvid='reality.cbs.com' WHERE serviceid = 53275;
