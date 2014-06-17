@@ -97,12 +97,14 @@ UPDATE channel SET channum=521, visible=1, xmltvid='smashhits.net' WHERE service
 UPDATE channel SET channum=523, visible=1, xmltvid='magictv.co.uk' WHERE serviceid = 52065;
 UPDATE channel SET channum=524, visible=1, xmltvid='kerrang.com' WHERE serviceid = 12015;
 UPDATE channel SET channum=600, visible=1, xmltvid='hd.cbbc.bbc.co.uk' WHERE serviceid = 6952;
-UPDATE channel SET channum=601, visible=1, xmltvid='cbeebies.bbc.co.uk' WHERE serviceid = 8932;
+UPDATE channel SET channum=601, visible=1, xmltvid='hd.cbeebies.bbc.co.uk' WHERE serviceid = 8932;
 UPDATE channel SET channum=602, visible=1, xmltvid='citv.itv.co.uk' WHERE serviceid = 10071;
 UPDATE channel SET channum=603, visible=1, xmltvid='popfun.co.uk' WHERE serviceid = 53340;
 UPDATE channel SET channum=604, visible=1 WHERE serviceid = 53360;
 UPDATE channel SET channum=605, visible=1, xmltvid='tinypop.com' WHERE serviceid = 53330;
 UPDATE channel SET channum=606, visible=1 WHERE serviceid = 53350;
+UPDATE channel SET channum=607, visible=1, xmltvid='cbbc.bbc.co.uk' WHERE serviceid = 10352;
+UPDATE channel SET channum=608, visible=1, xmltvid='cbeebies.bbc.co.uk' WHERE serviceid = 6318;
 
 ## BBC red button services
 UPDATE channel SET channum=981, visible=1 WHERE serviceid = 22101;
