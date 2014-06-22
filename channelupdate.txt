@@ -108,6 +108,11 @@ UPDATE channel SET channum=608, visible=1, xmltvid='cbeebies.bbc.co.uk' WHERE se
 
 ## BBC red button services
 UPDATE channel SET channum=981, visible=1 WHERE serviceid = 22101;
+UPDATE channel SET channum=982, visible=1 WHERE serviceid = 22102;
+UPDATE channel SET channum=983, visible=1 WHERE serviceid = 22103;
+UPDATE channel SET channum=984, visible=1 WHERE serviceid = 22104;
+UPDATE channel SET channum=985, visible=1 WHERE serviceid = 22105;
+UPDATE channel SET channum=986, visible=1 WHERE serviceid = 22110;
 
 ## Use EIT if we haven't set an xmltvid
 UPDATE channel SET useonairguide = 1 WHERE visible = 1 AND xmltvid = '';
