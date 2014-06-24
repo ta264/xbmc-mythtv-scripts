@@ -102,6 +102,16 @@ my %check_table = (
         },
     },
 
+    samba_sessions => {
+        help => 'Check for samba connections',
+        code => sub {
+            my $active_smb_sessions = int(`netstat -an | grep -E "\:445[ \t]+" | grep ESTABLISHED | wc -l`);
+            return "$active_smb_sessions active samba sessions"
+                if $active_smb_sessions > 0;
+            return;
+        },
+    },
+
     xbmc => {
         help => 'Check if XBMC is running',
         code => sub {
@@ -141,6 +151,7 @@ my @default_checks = qw(
     checklivetv
     sabnzbd
     ssh_sessions
+    samba_sessions
 );
 
 my $opt_ok = GetOptions(
