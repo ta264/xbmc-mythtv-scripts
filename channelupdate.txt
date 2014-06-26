@@ -106,6 +106,46 @@ UPDATE channel SET channum=606, visible=1 WHERE serviceid = 53350;
 UPDATE channel SET channum=607, visible=1, xmltvid='cbbc.bbc.co.uk' WHERE serviceid = 10352;
 UPDATE channel SET channum=608, visible=1, xmltvid='cbeebies.bbc.co.uk' WHERE serviceid = 6318;
 
+## Special Interest
+UPDATE channel SET channum=650, visible=1 WHERE serviceid = 55226;
+UPDATE channel SET channum=651, visible=1, xmltvid='communitychannel.org' WHERE serviceid = 4753;
+UPDATE channel SET channum=652, visible=1 WHERE serviceid = 54125;
+UPDATE channel SET channum=660, visible=1 WHERE serviceid = 54107;
+UPDATE channel SET channum=661, visible=1 WHERE serviceid = 55209;
+UPDATE channel SET channum=662, visible=1 WHERE serviceid = 52520;
+UPDATE channel SET channum=663, visible=1 WHERE serviceid = 50470;
+UPDATE channel SET channum=691, visible=1 WHERE serviceid = 52110;
+UPDATE channel SET channum=692, visible=1 WHERE serviceid = 52127;
+UPDATE channel SET channum=693, visible=1 WHERE serviceid = 53515;
+UPDATE channel SET channum=694, visible=1, xmltvid='god.tv' WHERE serviceid = 52126;
+UPDATE channel SET channum=695, visible=1 WHERE serviceid = 53560;
+UPDATE channel SET channum=696, visible=1 WHERE serviceid = 52124;
+
+## Shopping
+UPDATE channel SET channum=800, visible=1, xmltvid='qvcuk.com' WHERE serviceid = 7230;
+UPDATE channel SET channum=803, visible=1 WHERE serviceid = 54175;
+UPDATE channel SET channum=804, visible=1 WHERE serviceid = 54180;
+UPDATE channel SET channum=805, visible=1, xmltvid='gemstv.co.uk' WHERE serviceid = 55110;
+UPDATE channel SET channum=806, visible=1 WHERE serviceid = 9531;
+UPDATE channel SET channum=807, visible=1 WHERE serviceid = 52006;
+UPDATE channel SET channum=808, visible=1 WHERE serviceid = 54150;
+UPDATE channel SET channum=809, visible=1 WHERE serviceid = 10115;
+UPDATE channel SET channum=810, visible=1 WHERE serviceid = 52233;
+UPDATE channel SET channum=811, visible=1 WHERE serviceid = 52235;
+UPDATE channel SET channum=812, visible=1 WHERE serviceid = 52232;
+UPDATE channel SET channum=813, visible=1 WHERE serviceid = 52234;
+UPDATE channel SET channum=814, visible=1 WHERE serviceid = 7231;
+UPDATE channel SET channum=815, visible=1 WHERE serviceid = 53520;
+UPDATE channel SET channum=816, visible=1 WHERE serviceid = 54113;
+UPDATE channel SET channum=817, visible=1 WHERE serviceid = 9533;
+UPDATE channel SET channum=818, visible=1 WHERE serviceid = 7232;
+UPDATE channel SET channum=820, visible=1 WHERE serviceid = 52109;
+UPDATE channel SET channum=821, visible=1 WHERE serviceid = 55102;
+
+## Adult
+UPDATE channel SET channum=870, visible=1 WHERE serviceid = 55207;
+UPDATE channel SET channum=875, visible=1 WHERE serviceid = 53591;
+
 ## BBC red button services
 UPDATE channel SET channum=981, visible=1 WHERE serviceid = 22101;
 UPDATE channel SET channum=982, visible=1 WHERE serviceid = 22102;
