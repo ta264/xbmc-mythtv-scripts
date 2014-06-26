@@ -73,7 +73,7 @@ UPDATE channel SET channum=305, visible=1, xmltvid='tsod.plus-1.1.movies4men.co.
 UPDATE channel SET channum=400, visible=1 WHERE serviceid = 53280;
 UPDATE channel SET channum=401, visible=1 WHERE serviceid = 53230;
 UPDATE channel SET channum=402, visible=1 WHERE serviceid = 53285;
-UPDATE channel SET channum=408, visible=1, xmltvid='theactivechannel.com' WHERE serviceid = 55330;
+UPDATE channel SET channum=408, visible=1 WHERE serviceid = 55330;
 UPDATE channel SET channum=409, visible=1 WHERE serviceid = 55236;
 UPDATE channel SET channum=410, visible=1 WHERE serviceid = 52016;
 UPDATE channel SET channum=500, visible=1, xmltvid='chartshow.com' WHERE serviceid = 53365;
