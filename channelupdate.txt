@@ -114,6 +114,7 @@ UPDATE channel SET channum=660, visible=1 WHERE serviceid = 54107;
 UPDATE channel SET channum=661, visible=1 WHERE serviceid = 55209;
 UPDATE channel SET channum=662, visible=1 WHERE serviceid = 52520;
 UPDATE channel SET channum=663, visible=1 WHERE serviceid = 50470;
+UPDATE channel SET channum=690, visible=1 WHERE serviceid = 52290;
 UPDATE channel SET channum=691, visible=1 WHERE serviceid = 52110;
 UPDATE channel SET channum=692, visible=1 WHERE serviceid = 52127;
 UPDATE channel SET channum=693, visible=1 WHERE serviceid = 53515;
