@@ -126,7 +126,7 @@ UPDATE channel SET channum=696, visible=1 WHERE serviceid = 52124;
 UPDATE channel SET channum=800, visible=1, xmltvid='qvcuk.com' WHERE serviceid = 7230;
 UPDATE channel SET channum=803, visible=1 WHERE serviceid = 54175;
 UPDATE channel SET channum=804, visible=1 WHERE serviceid = 54180;
-UPDATE channel SET channum=805, visible=1, xmltvid='gemstv.co.uk' WHERE serviceid = 55110;
+UPDATE channel SET channum=805, visible=1 WHERE serviceid = 55110;
 UPDATE channel SET channum=806, visible=1 WHERE serviceid = 9531;
 UPDATE channel SET channum=807, visible=1 WHERE serviceid = 52006;
 UPDATE channel SET channum=808, visible=1 WHERE serviceid = 54150;
