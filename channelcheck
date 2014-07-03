@@ -1,0 +1,123 @@
+#!/usr/bin/perl -w
+
+use strict;
+use DBI;
+use Getopt::Long;
+
+my $dbhost="127.0.0.1";
+my $database="mythconverg";
+my $user="mythtv";
+my $pass="mythtv";
+my $sourceid = 1;
+my $hidden = 0;
+my $conf="channels.conf";
+
+GetOptions('dbhost=s'=>\$dbhost,
+           'database=s'=>\$database,
+           'user=s'=>\$user,
+           'pass=s'=>\$pass,
+           'sourceid=i'=>\$sourceid,
+           'hidden!'=>\$hidden,
+	   'conf=s'=>\$conf
+           ) || die "Usage:";
+
+# parse provided config fix
+print "Parsing channels file\n";
+
+my %channels;
+
+print "$conf\n";
+open CONFIG, "<$conf" or die "Failed to open channels.conf file $conf";
+my $line;
+while (defined($line = <CONFIG>))
+{
+    chomp($line);
+    my @parts = split(':',$line);
+    my $name = $parts[0];
+    my $freq = $parts[1];
+    my $info = $parts[2];
+    my $serviceid = $parts[9];
+
+    # parse info block
+    my $polarity = substr $info, 0, 1;
+    my $fec = substr $info, 2, 2;
+    my $modulation = substr $info, 5, 1;
+    my $rolloff = substr $info, 7, 2;
+
+    my $info = join "", $polarity, "C", $fec, "M", $modulation, "O", $rolloff;
+    print "$info\n";
+
+    # put into hashref
+    $channels{$serviceid} = {
+	name => $name,
+	frequency => $freq,
+	info => $info,
+	polarity => $polarity,
+	fec => $fec,
+	modulation => $modulation,
+	rolloff => $rolloff
+    };
+}
+close CONFIG;
+
+
+my $dbh = DBI->connect("dbi:mysql:database=$database:host=$dbhost","$user","$pass") || die "Cannot connect to database ($!)\n";
+
+my $sql = sprintf("SELECT callsign, frequency, polarity, modulation, symbolrate, serviceid, fec, rolloff
+                   FROM channel JOIN dtv_multiplex USING (mplexid)
+                   WHERE channel.sourceid = ? %s
+                   ORDER BY channum",
+                  ($hidden ? "" : "AND channel.visible = 1")
+                  );
+my $sth = $dbh->prepare($sql);
+$sth->execute($sourceid);
+
+# open CHANNELS, ">/tmp/channels.conf" or die $!;
+# my $chancount = 0;
+
+while (my @row=$sth->fetchrow_array) {
+    my $callsign = $row[0];
+    my $frequency = int($row[1] / 1000);
+    my $polarity = uc $row[2];
+    my $modulation = ($row[3] eq "qpsk") ? "2" : "5";
+    my $type = ($modulation eq "5") ? "S1" : "";
+    my $symbolrate = int($row[4] / 1000);
+    my $serviceid = $row[5];
+    my $fec = $row[6];
+    $fec =~ s!/!!g;
+    my $rolloff = $row[7] * 100;
+
+    # printf CHANNELS "$callsign:$frequency:$polarity C$fec M$modulation O$rolloff $type:0:$symbolrate:$serviceid\n";
+    # $chancount = $chancount + 1;
+
+    my $info = join "", $polarity, "C", $fec, "M", $modulation, "O", $rolloff, $type;
+
+    my $match = $channels{$serviceid};
+    if (defined($match))
+    {
+	# check if frequency and info the same
+	if (($match->{'frequency'} eq $frequency) && 
+	    ($match->{'polarity'} eq $polarity) && 
+	    ($match->{'modulation'} eq $modulation) && 
+	    ($match->{'fec'} eq $fec) && 
+	    ($match->{'rolloff'} eq $rolloff))
+
+	{
+	    # print "  details match\n";
+	}
+	else
+	{
+	    print "$callsign - found match $match->{'name'}\n";
+	    print "  details differ: $match->{'frequency'}:$match->{'info'} vs $frequency:$info\n";
+	}
+    }
+    else
+    {
+	print "$callsign - no match\n";
+    }
+
+}
+
+# close (CHANNELS);
+$dbh->disconnect;
+
