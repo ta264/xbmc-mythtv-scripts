@@ -22,14 +22,14 @@ GetOptions('dbhost=s'=>\$dbhost,
 	   'conf=s'=>\$conf
            ) || die "Usage:";
 
-# parse provided config fix
-print "Parsing channels file\n";
 
 my %channels;
 
-print "$conf\n";
+# parse provided config fix
+print "Parsing channels file: $conf\n";
 open CONFIG, "<$conf" or die "Failed to open channels.conf file $conf";
 my $line;
+
 while (defined($line = <CONFIG>))
 {
     chomp($line);
@@ -45,13 +45,13 @@ while (defined($line = <CONFIG>))
     my $modulation = substr $info, 5, 1;
     my $rolloff = substr $info, 7, 2;
 
-    my $info = join "", $polarity, "C", $fec, "M", $modulation, "O", $rolloff;
+    my $info2 = join "", $polarity, "C", $fec, "M", $modulation, "O", $rolloff;
 
     # put into hashref
     $channels{$serviceid} = {
 	name => $name,
 	frequency => $freq,
-	info => $info,
+	info => $info2,
 	polarity => $polarity,
 	fec => $fec,
 	modulation => $modulation,
@@ -102,7 +102,7 @@ while (my @row=$sth->fetchrow_array) {
 	else
 	{
 	    print "$callsign - found match $match->{'name'}\n";
-	    print "  details differ. Scan: $match->{'frequency'}:$match->{'info'} vs MythTV: $frequency:$info\n";
+	    print "  Details differ. Scan: $match->{'frequency'}:$match->{'info'} MythTV: $frequency:$info\n";
 	    push @moved_channels, $serviceid;
 	    push @tune_needed, $frequency . ":" . $info;
 	}
