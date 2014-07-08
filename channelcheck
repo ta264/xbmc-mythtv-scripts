@@ -3,6 +3,7 @@
 use strict;
 use DBI;
 use Getopt::Long;
+use List::MoreUtils qw/ uniq /;
 
 my $dbhost="127.0.0.1";
 my $database="mythconverg";
@@ -71,6 +72,10 @@ my $sql = sprintf("SELECT callsign, frequency, polarity, modulation, symbolrate,
 my $sth = $dbh->prepare($sql);
 $sth->execute($sourceid);
 
+my @moved_channels;
+my @missing_channels;
+my @tune_needed;
+
 while (my @row=$sth->fetchrow_array) {
     my $callsign = $row[0];
     my $frequency = int($row[1] / 1000);
@@ -98,14 +103,26 @@ while (my @row=$sth->fetchrow_array) {
 	{
 	    print "$callsign - found match $match->{'name'}\n";
 	    print "  details differ. Scan: $match->{'frequency'}:$match->{'info'} vs MythTV: $frequency:$info\n";
+	    push @moved_channels, $serviceid;
+	    push @tune_needed, $frequency . ":" . $info;
 	}
     }
     else
     {
 	print "$callsign - no match\n";
+	push @missing_channels, $serviceid;
     }
 
 }
 
 $dbh->disconnect;
+
+print "\n\nDelete missing channels:\n";
+print "DELETE FROM channel WHERE serviceid IN (" . join(',', @missing_channels) . ")\n";
+
+print "\n\nDelete moved channels:\n";
+print "DELETE FROM channel WHERE serviceid IN (" . join(',', @moved_channels) . ")\n";
+
+print "\n\nTune these frequencies:\n";
+print join('\n', uniq @tune_needed) . "\n\n\n";
 
