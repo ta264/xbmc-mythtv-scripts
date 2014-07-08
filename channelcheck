@@ -71,9 +71,6 @@ my $sql = sprintf("SELECT callsign, frequency, polarity, modulation, symbolrate,
 my $sth = $dbh->prepare($sql);
 $sth->execute($sourceid);
 
-# open CHANNELS, ">/tmp/channels.conf" or die $!;
-# my $chancount = 0;
-
 while (my @row=$sth->fetchrow_array) {
     my $callsign = $row[0];
     my $frequency = int($row[1] / 1000);
@@ -86,9 +83,6 @@ while (my @row=$sth->fetchrow_array) {
     $fec =~ s!/!!g;
     my $rolloff = $row[7] * 100;
 
-    # printf CHANNELS "$callsign:$frequency:$polarity C$fec M$modulation O$rolloff $type:0:$symbolrate:$serviceid\n";
-    # $chancount = $chancount + 1;
-
     my $info = join "", $polarity, "C", $fec, "M", $modulation, "O", $rolloff, $type;
 
     my $match = $channels{$serviceid};
@@ -99,9 +93,7 @@ while (my @row=$sth->fetchrow_array) {
 	    ($match->{'polarity'} eq $polarity) && 
 	    ($match->{'modulation'} eq $modulation) && 
 	    ($match->{'fec'} eq $fec))
-	{
-	    # print "  details match\n";
-	}
+	{ }
 	else
 	{
 	    print "$callsign - found match $match->{'name'}\n";
@@ -115,6 +107,5 @@ while (my @row=$sth->fetchrow_array) {
 
 }
 
-# close (CHANNELS);
 $dbh->disconnect;
 
