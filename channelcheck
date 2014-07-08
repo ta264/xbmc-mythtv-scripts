@@ -45,7 +45,6 @@ while (defined($line = <CONFIG>))
     my $rolloff = substr $info, 7, 2;
 
     my $info = join "", $polarity, "C", $fec, "M", $modulation, "O", $rolloff;
-    print "$info\n";
 
     # put into hashref
     $channels{$serviceid} = {
@@ -96,19 +95,17 @@ while (my @row=$sth->fetchrow_array) {
     if (defined($match))
     {
 	# check if frequency and info the same
-	if (($match->{'frequency'} eq $frequency) && 
+	if ((abs($match->{'frequency'} - $frequency) < 5) && 
 	    ($match->{'polarity'} eq $polarity) && 
 	    ($match->{'modulation'} eq $modulation) && 
-	    ($match->{'fec'} eq $fec) && 
-	    ($match->{'rolloff'} eq $rolloff))
-
+	    ($match->{'fec'} eq $fec))
 	{
 	    # print "  details match\n";
 	}
 	else
 	{
 	    print "$callsign - found match $match->{'name'}\n";
-	    print "  details differ: $match->{'frequency'}:$match->{'info'} vs $frequency:$info\n";
+	    print "  details differ. Scan: $match->{'frequency'}:$match->{'info'} vs MythTV: $frequency:$info\n";
 	}
     }
     else
