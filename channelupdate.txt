@@ -135,7 +135,7 @@ UPDATE channel SET channum=810, visible=1 WHERE serviceid = 52233;
 UPDATE channel SET channum=811, visible=1, icon='create_and_craft_extra.png' WHERE serviceid = 52235;
 UPDATE channel SET channum=812, visible=1 WHERE serviceid = 52232;
 UPDATE channel SET channum=813, visible=1 WHERE serviceid = 52234;
-UPDATE channel SET channum=814, visible=1, icon='qvc_extra.png' WHERE serviceid = 7231;
+UPDATE channel SET channum=814, visible=1, icon='qvc_extra_uk.png' WHERE serviceid = 7231;
 UPDATE channel SET channum=815, visible=1 WHERE serviceid = 53520;
 UPDATE channel SET channum=816, visible=1 WHERE serviceid = 54113;
 UPDATE channel SET channum=817, visible=1 WHERE serviceid = 9533;
