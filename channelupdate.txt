@@ -34,7 +34,7 @@ UPDATE channel SET channum=128, visible=1, xmltvid='tsod.plus-1.channel5.co.uk' 
 UPDATE channel SET channum=129, visible=1, xmltvid='fiveusa.channel5.co.uk' WHERE serviceid = 7710;
 UPDATE channel SET channum=130, visible=1, xmltvid='tsod.plus-1.fiveusa.channel5.co.uk' WHERE serviceid = 7711;
 UPDATE channel SET channum=131, visible=1 WHERE serviceid = 7715;
-UPDATE channel SET channum=132, visible=1 WHERE serviceid = 7716;
+UPDATE channel SET channum=132, visible=1, icon='channel5_region1.jpg' WHERE serviceid = 7716;
 UPDATE channel SET channum=134, visible=1, xmltvid='drama.cbs.com' WHERE serviceid = 50903;
 UPDATE channel SET channum=135, visible=1, xmltvid='reality.cbs.com' WHERE serviceid = 53275;
 UPDATE channel SET channum=136, visible=1, xmltvid='tsod.plus-1.reality.cbs.com' WHERE serviceid = 52102;
@@ -56,7 +56,7 @@ UPDATE channel SET channum=201, visible=1, xmltvid='parliament.bbc.co.uk' WHERE 
 UPDATE channel SET channum=202, visible=1, xmltvid='sky-news.sky.com' WHERE serviceid = 4706;
 UPDATE channel SET channum=203, visible=1, xmltvid='aljazeera.net' WHERE serviceid = 51107;
 UPDATE channel SET channum=204, visible=1 WHERE serviceid = 54224;
-UPDATE channel SET channum=205, visible=1 WHERE serviceid = 52570;
+UPDATE channel SET channum=205, visible=1, icon='france24_english.png' WHERE serviceid = 52570;
 UPDATE channel SET channum=206, visible=1 WHERE serviceid = 53148;
 UPDATE channel SET channum=207, visible=1, xmltvid='europe.cnn.com' WHERE serviceid = 7140;
 UPDATE channel SET channum=208, visible=1, xmltvid='bloomberg.com' WHERE serviceid = 52550;
@@ -70,12 +70,12 @@ UPDATE channel SET channum=302, visible=1, xmltvid='1.truemovies.tv' WHERE servi
 UPDATE channel SET channum=303, visible=1, xmltvid='2.truemovies.tv' WHERE serviceid = 53325;
 UPDATE channel SET channum=304, visible=1, xmltvid='1.movies4men.co.uk' WHERE serviceid = 51116;
 UPDATE channel SET channum=305, visible=1, xmltvid='tsod.plus-1.1.movies4men.co.uk' WHERE serviceid = 51118;
-UPDATE channel SET channum=400, visible=1 WHERE serviceid = 53280;
+UPDATE channel SET channum=400, visible=1, icon='showcase_tv_uk.png' WHERE serviceid = 53280;
 UPDATE channel SET channum=401, visible=1 WHERE serviceid = 53230;
 UPDATE channel SET channum=402, visible=1 WHERE serviceid = 53285;
 UPDATE channel SET channum=408, visible=1 WHERE serviceid = 55330;
 UPDATE channel SET channum=409, visible=1 WHERE serviceid = 55236;
-UPDATE channel SET channum=410, visible=1 WHERE serviceid = 52016;
+UPDATE channel SET channum=410, visible=1, icon='film_on_tv_us.png' WHERE serviceid = 52016;
 UPDATE channel SET channum=500, visible=1, xmltvid='chartshow.com' WHERE serviceid = 53365;
 UPDATE channel SET channum=501, visible=1 WHERE serviceid = 53355;
 UPDATE channel SET channum=502, visible=1 WHERE serviceid = 53300;
@@ -84,7 +84,7 @@ UPDATE channel SET channum=504, visible=1 WHERE serviceid = 52135;
 UPDATE channel SET channum=505, visible=1 WHERE serviceid = 55202;
 UPDATE channel SET channum=506, visible=1, xmltvid='bliss.co.uk' WHERE serviceid = 53305;
 UPDATE channel SET channum=509, visible=1 WHERE serviceid = 50470;
-UPDATE channel SET channum=510, visible=1 WHERE serviceid = 55113;
+UPDATE channel SET channum=510, visible=1, icon='clubland_tv_uk.png' WHERE serviceid = 55113;
 UPDATE channel SET channum=511, visible=1 WHERE serviceid = 55114;
 UPDATE channel SET channum=512, visible=1 WHERE serviceid = 52010;
 UPDATE channel SET channum=515, visible=1 WHERE serviceid = 52180;
@@ -102,22 +102,22 @@ UPDATE channel SET channum=602, visible=1, xmltvid='citv.itv.co.uk' WHERE servic
 UPDATE channel SET channum=603, visible=1, xmltvid='popfun.co.uk' WHERE serviceid = 53340;
 UPDATE channel SET channum=604, visible=1 WHERE serviceid = 53360;
 UPDATE channel SET channum=605, visible=1, xmltvid='tinypop.com' WHERE serviceid = 53330;
-UPDATE channel SET channum=606, visible=1 WHERE serviceid = 53350;
+UPDATE channel SET channum=606, visible=1, icon='kix_uk.png' WHERE serviceid = 53350;
 UPDATE channel SET channum=607, visible=1, xmltvid='cbbc.bbc.co.uk' WHERE serviceid = 10352;
 UPDATE channel SET channum=608, visible=1, xmltvid='cbeebies.bbc.co.uk' WHERE serviceid = 6318;
 
 ## Special Interest
 UPDATE channel SET channum=650, visible=1 WHERE serviceid = 55226;
 UPDATE channel SET channum=651, visible=1, xmltvid='communitychannel.org' WHERE serviceid = 4753;
-UPDATE channel SET channum=652, visible=1 WHERE serviceid = 54125;
+UPDATE channel SET channum=652, visible=1, icon='forces_tv_uk.png' WHERE serviceid = 54125;
 UPDATE channel SET channum=660, visible=1 WHERE serviceid = 54107;
-UPDATE channel SET channum=661, visible=1 WHERE serviceid = 55209;
+UPDATE channel SET channum=661, visible=1, icon='rishtey_uk.png' WHERE serviceid = 55209;
 UPDATE channel SET channum=662, visible=1 WHERE serviceid = 52520;
 UPDATE channel SET channum=663, visible=1 WHERE serviceid = 50470;
 UPDATE channel SET channum=690, visible=1 WHERE serviceid = 52290;
 UPDATE channel SET channum=691, visible=1 WHERE serviceid = 52110;
 UPDATE channel SET channum=692, visible=1 WHERE serviceid = 52127;
-UPDATE channel SET channum=693, visible=1 WHERE serviceid = 53515;
+UPDATE channel SET channum=693, visible=1, icon='islam_channel.png' WHERE serviceid = 53515;
 UPDATE channel SET channum=694, visible=1, xmltvid='god.tv' WHERE serviceid = 52126;
 UPDATE channel SET channum=695, visible=1 WHERE serviceid = 53560;
 UPDATE channel SET channum=696, visible=1 WHERE serviceid = 52124;
@@ -128,14 +128,14 @@ UPDATE channel SET channum=803, visible=1 WHERE serviceid = 54175;
 UPDATE channel SET channum=804, visible=1 WHERE serviceid = 54180;
 UPDATE channel SET channum=805, visible=1 WHERE serviceid = 55110;
 UPDATE channel SET channum=806, visible=1 WHERE serviceid = 9531;
-UPDATE channel SET channum=807, visible=1 WHERE serviceid = 52006;
+UPDATE channel SET channum=807, visible=1, icon='jewellery_maker.png' WHERE serviceid = 52006;
 UPDATE channel SET channum=808, visible=1 WHERE serviceid = 54150;
 UPDATE channel SET channum=809, visible=1 WHERE serviceid = 10115;
 UPDATE channel SET channum=810, visible=1 WHERE serviceid = 52233;
-UPDATE channel SET channum=811, visible=1 WHERE serviceid = 52235;
+UPDATE channel SET channum=811, visible=1, icon='create_and_craft_extra.png' WHERE serviceid = 52235;
 UPDATE channel SET channum=812, visible=1 WHERE serviceid = 52232;
 UPDATE channel SET channum=813, visible=1 WHERE serviceid = 52234;
-UPDATE channel SET channum=814, visible=1 WHERE serviceid = 7231;
+UPDATE channel SET channum=814, visible=1, icon='qvc_extra.png' WHERE serviceid = 7231;
 UPDATE channel SET channum=815, visible=1 WHERE serviceid = 53520;
 UPDATE channel SET channum=816, visible=1 WHERE serviceid = 54113;
 UPDATE channel SET channum=817, visible=1 WHERE serviceid = 9533;
@@ -148,12 +148,12 @@ UPDATE channel SET channum=870, visible=1 WHERE serviceid = 55207;
 UPDATE channel SET channum=875, visible=1 WHERE serviceid = 53591;
 
 ## BBC red button services
-UPDATE channel SET channum=981, visible=1 WHERE serviceid = 22101;
-UPDATE channel SET channum=982, visible=1 WHERE serviceid = 22102;
-UPDATE channel SET channum=983, visible=1 WHERE serviceid = 22103;
-UPDATE channel SET channum=984, visible=1 WHERE serviceid = 22104;
-UPDATE channel SET channum=985, visible=1 WHERE serviceid = 22105;
-UPDATE channel SET channum=986, visible=1 WHERE serviceid = 22110;
+UPDATE channel SET channum=981, visible=1, icon='bbc_red_button_uk.png' WHERE serviceid = 22101;
+UPDATE channel SET channum=982, visible=1, icon='bbc_red_button_uk.png' WHERE serviceid = 22102;
+UPDATE channel SET channum=983, visible=1, icon='bbc_red_button_uk.png' WHERE serviceid = 22103;
+UPDATE channel SET channum=984, visible=1, icon='bbc_red_button_uk.png' WHERE serviceid = 22104;
+UPDATE channel SET channum=985, visible=1, icon='bbc_red_button_uk.png' WHERE serviceid = 22105;
+UPDATE channel SET channum=986, visible=1, icon='bbc_red_button_uk.png' WHERE serviceid = 22110;
 
 ## Use EIT if we haven't set an xmltvid
 UPDATE channel SET useonairguide = 1 WHERE visible = 1 AND xmltvid = '';
