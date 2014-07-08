@@ -118,10 +118,10 @@ while (my @row=$sth->fetchrow_array) {
 $dbh->disconnect;
 
 print "\n\nDelete missing channels:\n";
-print "DELETE FROM channel WHERE serviceid IN (" . join(',', @missing_channels) . ")\n";
+print "DELETE FROM channel WHERE serviceid IN (" . join(',', @missing_channels) . ");\n";
 
 print "\n\nDelete moved channels:\n";
-print "DELETE FROM channel WHERE serviceid IN (" . join(',', @moved_channels) . ")\n";
+print "DELETE FROM channel WHERE serviceid IN (" . join(',', @moved_channels) . ");\n";
 
 print "\n\nTune these frequencies:\n";
 print join('\n', uniq @tune_needed) . "\n\n\n";
