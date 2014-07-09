@@ -8,6 +8,7 @@ use DateTime;
 use DateTime::Duration;
 use DateTime::Format::Strptime;
 use Getopt::Long qw( GetOptions );
+use match::smart;
 
 my %opt = (
     help => 0,
@@ -85,7 +86,7 @@ my %check_table = (
 	    my @last_status_ok = qw(Completed Failed);
 
 	    ## check that queue is not downloading and last element of history is Completed or Failed
-	    my $sab_busy = ($sab_queue && ($sab_queue->{status} eq 'Downloading')) || !($last_status ~~ @last_status_ok);
+	    my $sab_busy = ($sab_queue && ($sab_queue->{status} eq 'Downloading')) || !($last_status |M| @last_status_ok);
 
             return "SABnzbd is busy" if $sab_busy;
             return;

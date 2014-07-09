@@ -6,6 +6,8 @@ https://github.com/sdt/mythtv-scripts
 
 I have modified it slightly so it works when XBMC is used as a MythTV frontend.  It's called from this xbmc addon to manage powersaving, wake for record etc:https://github.com/ta264/service.mythtv.powersave
 
+Requires libmatch-simple-perl.
+
 ### powerbtn.sh
 Rename existing /etc/acpi/powerbtn.sh to /etc/acpi/powerbtn.sh.orig.  This version calls checkshutdown when the power button is pressed and if it likes the answer it will shutdown, otherwise it will do nothing.
 
