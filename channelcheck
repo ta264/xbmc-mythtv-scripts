@@ -104,7 +104,7 @@ while (my @row=$sth->fetchrow_array) {
 	    print "$callsign - found match $match->{'name'}\n";
 	    print "  Details differ. Scan: $match->{'frequency'}:$match->{'info'} MythTV: $frequency:$info\n";
 	    push @moved_channels, $serviceid;
-	    push @tune_needed, $frequency . ":" . $info;
+	    push @tune_needed, $match->{'frequency'} . ":" . $match->{'info'};
 	}
     }
     else
