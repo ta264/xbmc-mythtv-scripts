@@ -1,5 +1,23 @@
 <advancedsettings>
+  <videodatabase>
+    <type>mysql</type>
+    <host>192.168.0.3</host>
+    <port>3306</port>
+    <user>xbmc</user>
+    <pass>jackjack</pass>
+  </videodatabase> 
+  <musicdatabase>
+    <type>mysql</type>
+    <host>192.168.0.3</host>
+    <port>3306</port>
+    <user>xbmc</user>
+    <pass>jackjack</pass>
+  </musicdatabase>
+  <videolibrary>
+    <importwatchedstate>true</importwatchedstate>
+    <importresumepoint>true</importresumepoint>
+  </videolibrary>
   <splash>false</splash>
-  <gputempcommand>echo "$(nvidia-smi -q -d TEMPERATURE | grep Gpu | cut -c35-36) C"</gputempcommand>
+  <gputempcommand>echo "$(nvidia-smi -q -d TEMPERATURE | grep Gpu | cut -c39-40) C"</gputempcommand>
   <cputempcommand>sensors|sed -ne "s/temp1: \+[-+]\([0-9]\+\).*/\1 C/p"</cputempcommand>
 </advancedsettings>
