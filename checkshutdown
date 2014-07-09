@@ -8,7 +8,6 @@ use DateTime;
 use DateTime::Duration;
 use DateTime::Format::Strptime;
 use Getopt::Long qw( GetOptions );
-use match::smart;
 
 my %opt = (
     help => 0,
@@ -67,7 +66,7 @@ my %check_table = (
         code => sub {
             use JSON::XS qw( decode_json );
 
-            my $host = 'ta264.no-ip.org';
+            my $host = 'ta264.mooo.com';
             my $port = 80;
             my $key = 'b46d9626617568fadbbcbd07220feb56';
 
@@ -84,9 +83,10 @@ my %check_table = (
 	    }
 
 	    my @last_status_ok = qw(Completed Failed);
+	    my $status_ok = grep{$_ eq $last_status} @last_status_ok;
 
 	    ## check that queue is not downloading and last element of history is Completed or Failed
-	    my $sab_busy = ($sab_queue && ($sab_queue->{status} eq 'Downloading')) || !($last_status |M| @last_status_ok);
+	    my $sab_busy = ($sab_queue && ($sab_queue->{status} eq 'Downloading')) || !$status_ok;
 
             return "SABnzbd is busy" if $sab_busy;
             return;
@@ -181,7 +181,7 @@ sub main {
         $ok_to_shutdown = 0 if $msg;
         push(@msgs, $msg) if $msg;
         $msg ||= 'OK';
-        # logit(sprintf("%-16s$msg", "$name")) unless $opt{syslog};
+        logit(sprintf("%-16s$msg", "$name")) unless $opt{syslog};
     }
     if ($opt{syslog}) {
         my $prev_state = load_state();
