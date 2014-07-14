@@ -79,6 +79,7 @@ my @tune_needed;
 
 while (my @row=$sth->fetchrow_array) {
     my $callsign = $row[0];
+    $callsign =~ s/:/ /g;
     my $frequency = int($row[1] / 1000);
     my $polarity = uc $row[2];
     my $modulation = ($row[3] eq "qpsk") ? "2" : "5";
