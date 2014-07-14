@@ -92,7 +92,7 @@ while (my @row=$sth->fetchrow_array) {
     my $info = join "", $polarity, "C", $fec, "M", $modulation, "O", $rolloff, $type;
 
     my $match = $channels{$serviceid};
-    if (defined($match))
+    if (defined($match) && ($match->{'name'} eq ($callsign . ";BSkyB")))
     {
 	# check if frequency and info the same
 	if ((abs($match->{'frequency'} - $frequency) < 5) && 
