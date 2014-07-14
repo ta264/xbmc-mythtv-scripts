@@ -26,7 +26,7 @@ GetOptions('dbhost=s'=>\$dbhost,
 my %channels;
 
 # parse provided config fix
-print "Parsing channels file: $conf\n";
+print "Parsing channels file: $conf\n\n";
 open CONFIG, "<$conf" or die "Failed to open channels.conf file $conf";
 my $line;
 
@@ -131,12 +131,18 @@ while (my @row=$sth->fetchrow_array) {
 
 $dbh->disconnect;
 
-print "\n\nDelete missing channels:\n";
-print "DELETE FROM channel WHERE serviceid IN (" . join(',', @missing_channels) . ");\n";
+if (scalar @missing_channels > 0) {
+    print "\nDelete missing channels:\n";
+    print "DELETE FROM channel WHERE serviceid IN (" . join(',', @missing_channels) . ");\n";
+}
 
-print "\n\nDelete moved channels:\n";
-print "DELETE FROM channel WHERE serviceid IN (" . join(',', @moved_channels) . ");\n";
+if (scalar @moved_channels > 0) {
+    print "\nDelete moved channels:\n";
+    print "DELETE FROM channel WHERE serviceid IN (" . join(',', @moved_channels) . ");\n";
+}
 
-print "\n\nTune these frequencies:\n";
-print join("\n", uniq @tune_needed) . "\n\n\n";
+if (scalar @tune_needed > 0) {
+    print "\nTune these frequencies:\n";
+    print join("\n", uniq @tune_needed) . "\n";
+}
 
