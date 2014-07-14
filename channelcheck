@@ -74,6 +74,7 @@ $sth->execute($sourceid);
 
 my @moved_channels;
 my @missing_channels;
+my @changed_sid;
 my @tune_needed;
 
 while (my @row=$sth->fetchrow_array) {
@@ -109,10 +110,23 @@ while (my @row=$sth->fetchrow_array) {
     }
     else
     {
-	print "$callsign - no match\n";
 	push @missing_channels, $serviceid;
-    }
 
+	# look for name matches
+	my @name_matches = grep { $channels{$_}->{'name'} eq ($callsign . ";BSkyB") } keys %channels;
+
+	if (scalar @name_matches < 1) {
+	    print "$callsign ($serviceid): no match on ServiceID or name\n";
+	} elsif (scalar @name_matches eq 1) {
+	    print "$callsign ($serviceid): ServiceID changed to @name_matches\n";
+	    push @changed_sid, $serviceid;
+	    
+	    my $name_match = $channels{$name_matches[0]};
+	    push @tune_needed, $name_match->{'frequency'} . ":" . $name_match->{'info'};
+	} else {
+	    print "$callsign ($serviceid): ServiceID changed.  Multiple name matches: " . join(',', @name_matches) . "\n";
+	}
+    }
 }
 
 $dbh->disconnect;
@@ -124,5 +138,5 @@ print "\n\nDelete moved channels:\n";
 print "DELETE FROM channel WHERE serviceid IN (" . join(',', @moved_channels) . ");\n";
 
 print "\n\nTune these frequencies:\n";
-print join('\n', uniq @tune_needed) . "\n\n\n";
+print join("\n", uniq @tune_needed) . "\n\n\n";
 
