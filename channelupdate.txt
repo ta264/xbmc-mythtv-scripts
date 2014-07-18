@@ -109,7 +109,7 @@ UPDATE channel SET channum=608, visible=1, xmltvid='cbeebies.bbc.co.uk' WHERE se
 ## Special Interest
 UPDATE channel SET channum=650, visible=1 WHERE serviceid = 55226;
 UPDATE channel SET channum=651, visible=1, xmltvid='communitychannel.org' WHERE serviceid = 4753;
-UPDATE channel SET channum=652, visible=1, icon='forces_tv_uk.png' WHERE serviceid = 54125;
+UPDATE channel SET channum=652, visible=1, icon='forces_tv_uk.png' WHERE serviceid = 6033;
 UPDATE channel SET channum=660, visible=1 WHERE serviceid = 54107;
 UPDATE channel SET channum=661, visible=1, icon='rishtey_uk.png' WHERE serviceid = 55209;
 UPDATE channel SET channum=662, visible=1 WHERE serviceid = 52520;
@@ -159,7 +159,7 @@ UPDATE channel SET channum=986, visible=1, icon='bbc_red_button_uk.png' WHERE se
 UPDATE channel SET useonairguide = 1 WHERE visible = 1 AND xmltvid = '';
 
 ## delete unwanted channels
-##DELETE from channel where visible = 0;
+DELETE from channel where visible = 0;
 
 ## turn off commercial flagging for BBC channels
 UPDATE channel set commmethod=-2 WHERE name LIKE '%BBC%' OR name LIKE 'CBeebies%';
