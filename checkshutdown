@@ -8,6 +8,7 @@ use DateTime;
 use DateTime::Duration;
 use DateTime::Format::Strptime;
 use Getopt::Long qw( GetOptions );
+use List::MoreUtils qw( uniq );
 
 my %opt = (
     help => 0,
@@ -113,6 +114,22 @@ my %check_table = (
         },
     },
 
+    remote_mythtv => {
+        help => 'Check for remote mythtv clients connected on port 6543',
+        code => sub {
+            my @active_mythtv_sessions = `netstat -tn | grep "\:6543" | grep "ESTABLISHED" | awk '{print \$5}' | egrep -v "(127\.0\.0|192\.168\.0\.3\:)"`;
+	    my @ips;
+	    foreach (@active_mythtv_sessions) {
+		my ($ip, $port) = split(/:/, $_);
+		push @ips, $ip;
+	    }
+	    my $count_mythtv_sessions = scalar uniq @ips;
+            return $count_mythtv_sessions . " remote mythtv clients"
+                if $count_mythtv_sessions > 0;
+            return;
+        },
+    },
+
     xbmc => {
         help => 'Check if XBMC is running',
         code => sub {
@@ -153,6 +170,7 @@ my @default_checks = qw(
     sabnzbd
     ssh_sessions
     samba_sessions
+    remote_mythtv
 );
 
 my $opt_ok = GetOptions(
