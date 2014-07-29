@@ -3,11 +3,11 @@
 case "${1}" in
   hibernate|suspend)
     # /etc/init.d/mythtv-backend stop
-    service mythtv-backend stop
+    stop mythtv-backend
         ;;
   resume|thaw)
     # /etc/init.d/mythtv-backend start
-    service mythtv-backend start
+    start mythtv-backend
         ;;
   *)
     ;;
