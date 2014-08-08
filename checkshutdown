@@ -9,6 +9,7 @@ use DateTime::Duration;
 use DateTime::Format::Strptime;
 use Getopt::Long qw( GetOptions );
 use List::MoreUtils qw( uniq );
+use Net::Address::IP::Local;
 
 my %opt = (
     help => 0,
@@ -97,7 +98,7 @@ my %check_table = (
     ssh_sessions => {
         help => 'Check for users logged in by ssh',
         code => sub {
-            my $active_ssh_sessions = int(`who --ips | grep -vc "\(:0.*\)"`);
+            my $active_ssh_sessions = scalar check_remote_connections(2222);
             return "$active_ssh_sessions active ssh sessions"
                 if $active_ssh_sessions > 0;
             return;
@@ -107,7 +108,7 @@ my %check_table = (
     samba_sessions => {
         help => 'Check for samba connections',
         code => sub {
-            my $active_smb_sessions = int(`netstat -an | grep -E "\:445[ \t]+" | grep ESTABLISHED | wc -l`);
+            my $active_smb_sessions = scalar check_remote_connections(445);
             return "$active_smb_sessions active samba sessions"
                 if $active_smb_sessions > 0;
             return;
@@ -117,13 +118,7 @@ my %check_table = (
     remote_mythtv => {
         help => 'Check for remote mythtv clients connected on port 6543',
         code => sub {
-            my @active_mythtv_sessions = `netstat -tn | grep "\:6543" | grep "ESTABLISHED" | awk '{print \$5}' | egrep -v "(127\.0\.0|192\.168\.0\.3\:)"`;
-	    my @ips;
-	    foreach (@active_mythtv_sessions) {
-		my ($ip, $port) = split(/:/, $_);
-		push @ips, $ip;
-	    }
-	    my $count_mythtv_sessions = scalar uniq @ips;
+	    my $count_mythtv_sessions = scalar uniq check_remote_connections(6543);
             return $count_mythtv_sessions . " remote mythtv clients"
                 if $count_mythtv_sessions > 0;
             return;
@@ -269,4 +264,14 @@ sub last_apache_access {
     }
     return unless defined $dt;
     return $parser->parse_datetime($dt);
+}
+
+sub check_remote_connections {
+    my ($port) = @_;
+    my $localip = Net::Address::IP::Local->public_ipv4;
+    $localip =~ s/\./\\./g;
+    my $localip_regex = "(127\\.0\\.0|$localip)";
+    my $command = "netstat -n | awk '\$4~/:$port/ && \$5!~/$localip_regex/ && \$6 == \"ESTABLISHED\" {split(\$5,a,\":\"); print a[1]}'";
+    my @outp = `$command`;
+    return @outp;
 }
