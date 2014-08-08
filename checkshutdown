@@ -68,8 +68,8 @@ my %check_table = (
         code => sub {
             use JSON::XS qw( decode_json );
 
-            my $host = 'ta264.mooo.com';
-            my $port = 80;
+            my $host = '127.0.0.1';
+            my $port = 8080;
             my $key = 'b46d9626617568fadbbcbd07220feb56';
 
             my $uri_queue = "http://$host:$port/sabnzbd/api?mode=queue\\&output=json\\&apikey=$key";
