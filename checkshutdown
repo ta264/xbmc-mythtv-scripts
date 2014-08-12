@@ -10,6 +10,7 @@ use DateTime::Format::Strptime;
 use Getopt::Long qw( GetOptions );
 use List::MoreUtils qw( uniq );
 use Net::Address::IP::Local;
+use Transmission::Client;
 
 my %opt = (
     help => 0,
@@ -95,6 +96,26 @@ my %check_table = (
         },
     },
 
+    transmission => {
+	help => 'Check if transmission is busy',
+	code => sub {
+
+	    my $client = Transmission::Client->new;
+	    my $transmission_busy = 0;
+
+	    for my $torrent (@{ $client->torrents }) {
+		my $status = $torrent->status;
+		if ($status >= 1 && $status <= 4) {
+		    $transmission_busy = 1;
+		}
+	    }
+
+	    return 'Transmission is busy' if $transmission_busy;
+	    return;
+	},
+    },
+
+
     ssh_sessions => {
         help => 'Check for users logged in by ssh',
         code => sub {
@@ -163,6 +184,7 @@ my @default_checks = qw(
     mythshutdown
     checklivetv
     sabnzbd
+    transmission
     ssh_sessions
     samba_sessions
     remote_mythtv
