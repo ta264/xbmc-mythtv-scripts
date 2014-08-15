@@ -183,11 +183,11 @@ my %check_table = (
 my @default_checks = qw(
     mythshutdown
     checklivetv
+    remote_mythtv
     sabnzbd
     transmission
     ssh_sessions
     samba_sessions
-    remote_mythtv
 );
 
 my $opt_ok = GetOptions(
