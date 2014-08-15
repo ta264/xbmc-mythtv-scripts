@@ -1,7 +1,11 @@
 #!/usr/bin/python
-import MythTV
+import MythTV, sys
 
-backend = MythTV.MythBE()
+try:
+    backend = MythTV.MythBE()
+except MythTV.MythBEError:
+    sys.exit(1)
+
 allRecorders = backend.getRecorderList()
 freeRecorders = backend.getFreeRecorderList()
 

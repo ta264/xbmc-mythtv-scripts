@@ -59,7 +59,7 @@ my %check_table = (
 	code => sub {
 	    my $output = `checklivetv`;
 	    return 'live TV playback in progress'
-		if $output eq "recording\n";
+		if $output ne "not recording\n";
 	    return;
 	},
     },
