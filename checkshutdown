@@ -105,7 +105,8 @@ my %check_table = (
 
 	    for my $torrent (@{ $client->torrents }) {
 		my $status = $torrent->status;
-		if ($status >= 1 && $status <= 4) {
+		# if ($status >= 1 && $status <= 4) {
+		if ($status >= 1) {
 		    $transmission_busy = 1;
 		}
 	    }
