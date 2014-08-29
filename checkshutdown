@@ -293,7 +293,7 @@ sub check_remote_connections {
     my ($port) = @_;
     my $localip = Net::Address::IP::Local->public_ipv4;
     $localip =~ s/\./\\./g;
-    my $localip_regex = "(127\\.0\\.0|$localip)";
+    my $localip_regex = "(127\\.0\\.0|$localip:)";
     my $command = "netstat -n | awk '\$4~/:$port/ && \$5!~/$localip_regex/ && \$6 == \"ESTABLISHED\" {split(\$5,a,\":\"); print a[1]}'";
     my @outp = `$command`;
     return @outp;
