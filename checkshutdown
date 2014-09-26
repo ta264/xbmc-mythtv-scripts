@@ -55,10 +55,14 @@ my %check_table = (
     },
 
     checklivetv => {
-	help => 'Check if someone is watching live TV',
+	help => 'Check if a TV tuner is in use',
 	code => sub {
 	    my $output = `checklivetv`;
-	    return 'live TV playback in progress'
+	    my $exitcode = $? >> 8;
+	    # print $exitcode . "\n";
+	    return 'error connecting to backend'
+		if $exitcode eq 1;
+	    return 'TV tuner in use'
 		if $output ne "not recording\n";
 	    return;
 	},
