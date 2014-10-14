@@ -1,4 +1,12 @@
 <advancedsettings>
+  <latency>
+    <delay>0</delay>
+    <refresh>
+      <min>23</min>
+      <max>24</max>
+      <delay>50</delay>
+    </refresh>
+  </latency>
   <videodatabase>
     <type>mysql</type>
     <host>192.168.0.3</host>
