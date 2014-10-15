@@ -4,7 +4,7 @@ import MythTV
 import tvdb_api
 from optparse import OptionParser
 import dateutil.parser
-import os, sys
+import os, sys, subprocess
 
 t = tvdb_api.Tvdb()
 
@@ -97,28 +97,53 @@ def get_extension(path):
     splitpath = path.split('.')
     return splitpath[-1]
 
+def get_skip_list(program):
+    chanid = program.chanid
+    startts = program.recstartts.mythformat()
+    command = "mythutil -q --getskiplist --chanid %s --starttime %s" % (chanid, startts)
+    args = command.split(" ")
+
+    outp = subprocess.check_output(args).strip()
+    skiplist = outp[22::].replace("-", " ").split(",")
+    return skiplist
+
+def write_skip_list(skiplist, dest):
+    with open(dest, 'w') as f:
+        f.write("FILE PROCESSING COMPLETE\n")
+        f.write("------------------------\n")
+        for entry in skiplist:
+            f.write(entry + "\n")
+
 def create_link(program, folder):
     source = backend.getCheckfile(program)
     extension = get_extension(source)
-    linkname = os.path.join(show_name(program), season_string(program), format_name(program) + "." + extension)
-    dest = os.path.join(folder, linkname)
+    linkname = os.path.join(show_name(program), season_string(program), format_name(program))
+    linkdest = os.path.join(folder, linkname + "." + extension)
 
     # make sure destination exists
-    sdest = dest.split('/')
+    sdest = linkdest.split('/')
     for i in range(2,len(sdest)):
         tmppath = "/" + os.path.join(*sdest[:i])
         if not os.access(tmppath, os.F_OK):
             os.mkdir(tmppath)
 
-    os.symlink(source, dest)
+    # create the link
+    os.symlink(source, linkdest)
+
+    # add comskip file
+    comskipdest = os.path.join(folder, linkname + ".txt")
+    write_skip_list(get_skip_list(program), comskipdest)
 
 def remove_links(folder):
     for path,dirs,files in os.walk(folder, topdown=False):
         for fname in files:
             tmppath = os.path.join(path, fname)
-            if not os.path.islink(tmppath):
+            if os.path.islink(tmppath):
+                os.unlink(tmppath)
+            elif get_extension(tmppath) == "txt":
+                os.remove(tmppath)
+            else:
                 raise Exception('Non-link file found in destination path.')
-            os.unlink(tmppath)
         os.rmdir(path)
 
 parser = OptionParser(usage="usage: %prog [options] [jobid]")
