@@ -93,9 +93,14 @@ def format_name(program):
            + episode_name(program)
     return outp
 
+def get_extension(path):
+    splitpath = path.split('.')
+    return splitpath[-1]
+
 def create_link(program, folder):
-    linkname = os.path.join(show_name(program), season_string(program), format_name(program))
     source = backend.getCheckfile(program)
+    extension = get_extension(source)
+    linkname = os.path.join(show_name(program), season_string(program), format_name(program) + "." + extension)
     dest = os.path.join(folder, linkname)
 
     # make sure destination exists
