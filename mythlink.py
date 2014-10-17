@@ -128,12 +128,15 @@ def create_link(program, folder):
     for i in range(2,len(sdest)):
         tmppath = "/" + os.path.join(*sdest[:i])
         if not os.access(tmppath, os.F_OK):
+            logger.log('Creating directory ' + tmppath)
             os.mkdir(tmppath)
 
     # create the link
+    logger.log('Symlinking ' + linkname)
     os.symlink(source, linkdest)
 
     # add comskip file
+    logger.log('Writing comskip file for ' + linkname)
     comskipdest = os.path.join(folder, linkname + ".txt")
     write_skip_list(get_skip_list(program), comskipdest)
 
@@ -210,4 +213,6 @@ else:
     for program in recordings:
         if opts.all or tvdb_ref(program) is not None:
             create_link(program, opts.dest)
+
+    logger.log('Done')
 
