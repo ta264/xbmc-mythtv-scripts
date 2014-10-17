@@ -215,8 +215,6 @@ else:
     # remove old links
     logger.log('Remove old links')
     remove_links(opts.dest)
-    logger.log('Cleaning XBMC library')
-    xbmc.VideoLibrary.Clean()
 
     logger.log('Getting recordings')
     recordings = backend.getRecordings()
@@ -228,6 +226,8 @@ else:
 
     logger.log('Scanning XBMC library')
     xbmc.VideoLibrary.Scan()
+    logger.log('Cleaning XBMC library')
+    xbmc.VideoLibrary.Clean()
 
 logger.log('Done')
 
