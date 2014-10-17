@@ -18,15 +18,6 @@ class MYLOG(MythTV.MythLog):
     # prepend string to msg so that rsyslog routes it to mythcommflag.log logfile
     MythTV.MythLog.log(self, MythTV.MythLog.FILE, level, 'mythutil: ' + msg.rstrip('\n'))
 
-
-t = tvdb_api.Tvdb()
-
-try:
-    database = MythTV.MythDB()
-    backend = MythTV.MythBE()
-except MythTV.MythBEError:
-    sys.exit(1)
-
 def tvdb_ref(program):
     dbref = program.inetref
     
@@ -158,6 +149,15 @@ def remove_links(folder):
                 raise Exception('Non-link file found in destination path.')
         os.rmdir(path)
 
+t = tvdb_api.Tvdb()
+
+try:
+    database = MythTV.MythDB()
+    backend = MythTV.MythBE()
+except MythTV.MythBEError:
+    sys.exit(1)
+
+
 parser = OptionParser(usage="usage: %prog [options] [jobid]")
 parser.add_option("--dest", action="store", type="str", dest="dest",
                   help="""Specify the directory for the links.  If no pathname
@@ -182,7 +182,6 @@ parser.add_option("--all", action="store_true", dest="all", default=False,
 # Set up logging
 MYLOG.loadOptParse(parser)
 MYLOG._setmask(MYLOG.FILE)
-
 logger = MYLOG(db=database)
 logger.log('Initializing')
 
