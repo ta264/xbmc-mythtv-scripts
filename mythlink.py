@@ -5,6 +5,7 @@ import tvdb_api
 from optparse import OptionParser
 import dateutil.parser
 import os, sys, subprocess
+from xbmcjson import XBMC
 
 class MYLOG(MythTV.MythLog):
   "A specialised logger"
@@ -190,6 +191,9 @@ MYLOG._setmask(MYLOG.FILE)
 logger = MYLOG(db=database)
 logger.log('Initializing')
 
+# Connect to XBMC
+xbmc = XBMC("http://localhost:8000/jsonrpc")
+
 opts, args = parser.parse_args()
 
 if opts.dest is None:
@@ -204,10 +208,15 @@ if opts.chanid and opts.starttime:
     # if rec is not None:
     create_link(rec, opts.dest)
 
+    logger.log('Scanning XBMC library')
+    xbmc.VideoLibrary.Scan()
+
 else:
     # remove old links
     logger.log('Remove old links')
     remove_links(opts.dest)
+    logger.log('Cleaning XBMC library')
+    xbmc.VideoLibrary.Clean()
 
     logger.log('Getting recordings')
     recordings = backend.getRecordings()
@@ -216,6 +225,9 @@ else:
     for program in recordings:
         if opts.all or tvdb_ref(program) is not None:
             create_link(program, opts.dest)
+
+    logger.log('Scanning XBMC library')
+    xbmc.VideoLibrary.Scan()
 
 logger.log('Done')
 
