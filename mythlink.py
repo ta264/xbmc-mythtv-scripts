@@ -133,6 +133,8 @@ def create_link(program, folder):
 
     # create the link
     logger.log('Symlinking ' + linkname)
+    if os.path.islink(linkdest):
+      os.unlink(linkdest)
     os.symlink(source, linkdest)
 
     # add comskip file
