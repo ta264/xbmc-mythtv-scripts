@@ -196,6 +196,7 @@ if opts.dest is None:
 
 if opts.chanid and opts.starttime:
     # starttime = dateutil.parser.parse(str(opts.starttime) + "UTC")
+    logger.log('Creating single link.  Chanid %d starttime %d' % (opts.chanid, opts.starttime))
     starttime = dateutil.parser.parse(str(opts.starttime))
     rec = backend.getRecording(opts.chanid, starttime)
     # if rec is not None:
@@ -214,5 +215,5 @@ else:
         if opts.all or tvdb_ref(program) is not None:
             create_link(program, opts.dest)
 
-    logger.log('Done')
+logger.log('Done')
 
