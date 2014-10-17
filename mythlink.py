@@ -6,6 +6,19 @@ from optparse import OptionParser
 import dateutil.parser
 import os, sys, subprocess
 
+class MYLOG(MythTV.MythLog):
+  "A specialised logger"
+
+  def __init__(self, db):
+    "Initialise logging"
+    MythTV.MythLog.__init__(self, '', db)
+
+  def log(self, msg, level = MythTV.MythLog.INFO):
+    "Log message"
+    # prepend string to msg so that rsyslog routes it to mythcommflag.log logfile
+    MythTV.MythLog.log(self, MythTV.MythLog.FILE, level, 'mythutil: ' + msg.rstrip('\n'))
+
+
 t = tvdb_api.Tvdb()
 
 try:
@@ -13,7 +26,6 @@ try:
     backend = MythTV.MythBE()
 except MythTV.MythBEError:
     sys.exit(1)
-
 
 def tvdb_ref(program):
     dbref = program.inetref
@@ -167,6 +179,13 @@ parser.add_option("--starttime", action="store", type="int", dest="starttime",
 parser.add_option("--all", action="store_true", dest="all", default=False,
                   help="""Create a link for all files, even if not known to tvdb.""")
 
+# Set up logging
+MYLOG.loadOptParse(parser)
+MYLOG._setmask(MYLOG.FILE)
+
+logger = MYLOG(db=database)
+logger.log('Initializing')
+
 opts, args = parser.parse_args()
 
 if opts.dest is None:
@@ -182,9 +201,13 @@ if opts.chanid and opts.starttime:
 
 else:
     # remove old links
+    logger.log('Remove old links')
     remove_links(opts.dest)
 
+    logger.log('Getting recordings')
     recordings = backend.getRecordings()
+
+    logger.log('Creating new links')
     for program in recordings:
         if opts.all or tvdb_ref(program) is not None:
             create_link(program, opts.dest)
