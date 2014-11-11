@@ -100,6 +100,24 @@ my %check_table = (
         },
     },
 
+    nzbget => {
+        help => 'Check if NZBGet is busy',
+        code => sub {
+            use JSON::XS qw( decode_json );
+
+            my $host = '127.0.0.1';
+            my $port = 6789;
+
+            my $uri_status = "http://$host:$port/jsonrpc/status";
+
+	    ## check that server is in standby
+	    my $standby = decode_json(`curl -s $uri_status`)->{result}->{ServerStandBy};
+            return "NZBGet is busy" if $standby ne "1";
+            return;
+        },
+    },
+
+
     transmission => {
 	help => 'Check if transmission is busy',
 	code => sub {
@@ -190,6 +208,7 @@ my @default_checks = qw(
     checklivetv
     remote_mythtv
     sabnzbd
+    nzbget
     transmission
     ssh_sessions
     samba_sessions
