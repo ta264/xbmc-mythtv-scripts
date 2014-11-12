@@ -207,7 +207,6 @@ my @default_checks = qw(
     mythshutdown
     checklivetv
     remote_mythtv
-    sabnzbd
     nzbget
     transmission
     ssh_sessions
