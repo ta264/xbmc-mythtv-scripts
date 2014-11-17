@@ -221,8 +221,9 @@ else:
 
     logger.log('Creating new links')
     for program in recordings:
-        if opts.all or tvdb_ref(program) is not None:
-            create_link(program, opts.dest)
+      if opts.all or tvdb_ref(program) is not None:
+        if program.recgroup != "LiveTV":
+          create_link(program, opts.dest)
 
     logger.log('Scanning XBMC library')
     xbmc.VideoLibrary.Scan()
