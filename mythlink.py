@@ -4,7 +4,7 @@ import MythTV
 import tvdb_api
 from optparse import OptionParser
 import dateutil.parser
-import os, sys, subprocess
+import os, sys, subprocess, time
 from xbmcjson import XBMC
 
 class MYLOG(MythTV.MythLog):
@@ -225,8 +225,11 @@ else:
         if program.recgroup != "LiveTV":
           create_link(program, opts.dest)
 
+    time.sleep(1)
     logger.log('Scanning XBMC library')
     xbmc.VideoLibrary.Scan()
+
+    time.sleep(10)
     logger.log('Cleaning XBMC library')
     xbmc.VideoLibrary.Clean()
 
