@@ -4,7 +4,7 @@
     <refresh>
       <min>23</min>
       <max>24</max>
-      <delay>50</delay>
+      <delay>200</delay>
     </refresh>
   </latency>
   <videodatabase>
