@@ -109,14 +109,17 @@ def get_skip_list(program):
 
     outp = subprocess.check_output(args).strip()
     skiplist = outp[22::].replace("-", " ").split(",")
+    if len(skiplist[0]) == 0:
+    skiplist = None
     return skiplist
 
 def write_skip_list(skiplist, dest):
-    with open(dest, 'w') as f:
+    if skiplist is not None:
+      with open(dest, 'w') as f:
         f.write("FILE PROCESSING COMPLETE\n")
         f.write("------------------------\n")
         for entry in skiplist:
-            f.write(entry + "\n")
+          f.write(entry + "\n")
 
 def create_link(program, folder):
     source = backend.getCheckfile(program)
