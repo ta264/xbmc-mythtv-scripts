@@ -110,7 +110,7 @@ def get_skip_list(program):
     outp = subprocess.check_output(args).strip()
     skiplist = outp[22::].replace("-", " ").split(",")
     if len(skiplist[0]) == 0:
-    skiplist = None
+      skiplist = None
     return skiplist
 
 def write_skip_list(skiplist, dest):
