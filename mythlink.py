@@ -124,7 +124,17 @@ def write_skip_list(skiplist, dest):
 def create_link(program, folder):
     source = backend.getCheckfile(program)
     extension = get_extension(source)
-    linkname = os.path.join(show_name(program), season_string(program), format_name(program))
+    
+    # Try to get link name
+    try:
+      linkname = os.path.join(show_name(program), season_string(program), format_name(program))
+    except:
+      progname = program.title
+      if program.subtitle is not None:
+        progname += ": " + program.subtitle
+      logger.log('Failed to look up details for: ' + progname)
+      return
+
     linkdest = os.path.join(folder, linkname + "." + extension)
 
     # make sure destination exists
