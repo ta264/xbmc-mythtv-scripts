@@ -111,7 +111,9 @@ my %check_table = (
             my $uri_status = "http://$host:$port/jsonrpc/status";
 
 	    ## check that server is in standby
-	    my $standby = decode_json(`curl -s $uri_status`)->{result}->{ServerStandBy};
+	    my $raw_json = `curl -s $uri_status`;
+	    return "Could not connect to NZBGet" if (length ($raw_json) == 0);
+	    my $standby = decode_json($raw_json)->{result}->{ServerStandBy};
             return "NZBGet is busy" if $standby ne "1";
             return;
         },
