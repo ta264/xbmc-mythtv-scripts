@@ -1,12 +1,20 @@
 <advancedsettings>
-  <latency>
-    <delay>0</delay>
-    <refresh>
-      <min>23</min>
-      <max>24</max>
-      <delay>200</delay>
-    </refresh>
-  </latency>
+  <video>
+    <latency>
+      <delay>0</delay>
+      <refresh>
+	<min>23</min>
+	<max>24.1</max>
+	<delay>25</delay>
+      </refresh>
+    </latency>
+  </video>
+  <epg>
+    <!-- display a progress popup while updating EPG data from clients -->
+    <displayupdatepopup>false</displayupdatepopup>
+    <!-- also display a progress popup while doing incremental EPG updates -->
+    <displayincrementalupdatepopup>false</displayincrementalupdatepopup>
+  </epg>
   <videodatabase>
     <type>mysql</type>
     <host>192.168.0.3</host>
