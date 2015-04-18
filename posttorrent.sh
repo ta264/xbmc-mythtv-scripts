@@ -11,7 +11,7 @@
   # Directory to store the un-compressed files in..
   DEST_DIR="${TR_TORRENT_DIR}/${TR_TORRENT_NAME}/"
   # This parameter string could be passed from Transmission in the future.
-  TR_TORRENT_PARAMETER="EXTRACT SLEEP1h"
+  TR_TORRENT_PARAMETER="EXTRACT SLEEP36h"
 
   if [ -e "$SRC_DIR/keep" ]; then
     TR_TORRENT_PARAMETER="$TR_TORRENT_PARAMETER KEEP"
