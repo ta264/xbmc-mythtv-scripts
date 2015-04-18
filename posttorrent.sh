@@ -1,5 +1,6 @@
 #! /bin/bash
 # posttorrent.sh by Killemov
+# from https://forum.transmissionbt.com/viewtopic.php?f=1&t=10364
 {
   # Log file, file where we tell what events have been processed.
   LOG_FILE=/var/log/posttorrent.log
