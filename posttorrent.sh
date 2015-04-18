@@ -4,10 +4,6 @@
 {
   # Log file, file where we tell what events have been processed.
   LOG_FILE=/var/log/posttorrent.log
-  # Username for transmission remote.
-  TR_USERNAME="username"
-  # Password for transmission remote.
-  TR_PASSWORD="password"
   # Get current time.
   NOW=$(date +%Y-%m-%d\ %H:%M:%S)
   # Source directory, should not be changed.
@@ -52,7 +48,7 @@
           unrar x -inul "$RAR_FILE" "$DEST_DIR"
           if [ $? -gt 0 ]; then
             echo $NOW "Error unrarring $TR_TORRENT_NAME" >> $LOG_FILE
-            transmission-remote -n $TR_USERNAME:$TR_PASSWORD -t $TR_TORRENT_HASH --verify --start
+            transmission-remote -t $TR_TORRENT_HASH --verify --start
             exit 0
           fi
         done
@@ -61,7 +57,7 @@
           if [ ${#SLEEP} -gt 0 ]; then
             sleep $SLEEP
           fi
-          transmission-remote -n $TR_USERNAME:$TR_PASSWORD -t $TR_TORRENT_HASH --remove-and-delete
+          transmission-remote -t $TR_TORRENT_HASH --remove-and-delete
         fi
         echo $NOW "Unrarred $TR_TORRENT_NAME" >> $LOG_FILE
       fi
