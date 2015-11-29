@@ -1,4 +1,5 @@
 <advancedsettings>
+  <!-- <loglevel hide="false">1</loglevel> -->
   <video>
     <latency>
       <delay>0</delay>
