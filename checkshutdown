@@ -144,7 +144,7 @@ my %check_table = (
     ssh_sessions => {
         help => 'Check for users logged in by ssh',
         code => sub {
-            my $active_ssh_sessions = scalar check_remote_connections(2222);
+            my $active_ssh_sessions = scalar check_remote_connections(22);
             return "$active_ssh_sessions active ssh sessions"
                 if $active_ssh_sessions > 0;
             return;
