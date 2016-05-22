@@ -171,6 +171,16 @@ my %check_table = (
         },
     },
 
+    emby => {
+        help => 'Check for remote emby clients connected on port 8096',
+        code => sub {
+	    my $count_emby_sessions = scalar uniq check_remote_connections(8096);
+            return $count_emby_sessions . " remote emby clients"
+                if $count_emby_sessions > 0;
+            return;
+        },
+    },
+
     xbmc => {
         help => 'Check if XBMC is running',
         code => sub {
@@ -213,6 +223,7 @@ my @default_checks = qw(
     transmission
     ssh_sessions
     samba_sessions
+    emby
 );
 
 my $opt_ok = GetOptions(
