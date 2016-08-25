@@ -1,2 +1,2 @@
 #! /bin/bash
-/usr/bin/mythfilldatabase --loglevel debug --syslog local7 -v --only-update-guide --refresh 0 --refresh 6
+/usr/bin/mythfilldatabase --loglevel debug --syslog local7 -v --only-update-guide
