@@ -6,15 +6,11 @@ try:
 except MythTV.MythBEError:
     sys.exit(1)
 
-allRecorders = backend.getRecorderList()
-freeRecorders = backend.getFreeRecorderList()
+recorders = backend.getRecorderList()
 
-if set(allRecorders) == set(freeRecorders):
-    print("not recording")
-else:
-    print("recording")
+for recorder in recorders:
+    if backend.isRecording(recorder):
+        print("recording")
+        exit()
 
-
-
-
-
+print ("not recording")
