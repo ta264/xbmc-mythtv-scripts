@@ -113,8 +113,10 @@ my %check_table = (
 	    ## check that server is in standby
 	    my $raw_json = `curl -s $uri_status`;
 	    return "Could not connect to NZBGet" if (length ($raw_json) == 0);
-	    my $standby = decode_json($raw_json)->{result}->{ServerStandBy};
-            return "NZBGet is busy" if $standby ne "1";
+            my $status = decode_json($raw_json)->{result};
+	    my $standby = $status->{ServerStandBy};
+            my $postjobs = $status->{PostJobCount};
+            return "NZBGet is busy" if $standby ne "1" or $postjobs ne "0";
             return;
         },
     },
