@@ -222,7 +222,6 @@ my @default_checks = qw(
     checklivetv
     remote_mythtv
     nzbget
-    transmission
     ssh_sessions
     samba_sessions
     emby
