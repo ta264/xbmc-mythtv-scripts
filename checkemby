@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+
+from pyemby.emby import EmbyRemote
+from datetime import datetime, timezone
+from dateutil.parser import parse
+import sys
+
+emby = EmbyRemote("ace5cea1a2124bd0ac6881ee2b25f0d8", "http://localhost:8096")
+sessions = emby.get_sessions()
+
+for session in sessions:
+    idlesecs = (datetime.now(timezone.utc) - parse(session["LastActivityDate"])).total_seconds()
+    # print(session["DeviceName"], idlesecs)
+    if idlesecs < 180:
+        sys.exit(1)
+
+sys.exit(0)
+

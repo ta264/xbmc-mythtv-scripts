@@ -174,11 +174,11 @@ my %check_table = (
     },
 
     emby => {
-        help => 'Check for remote emby clients connected on port 8096',
-        code => sub {
-	    my $count_emby_sessions = scalar uniq check_remote_connections(8096);
-            return $count_emby_sessions . " remote emby clients"
-                if $count_emby_sessions > 0;
+        help => 'Check if emby is in use',
+	code => sub {
+            my $exit = system(qw(checkemby)) >> 8;
+            return sprintf('emby busy')
+                if $exit == 1;
             return;
         },
     },
