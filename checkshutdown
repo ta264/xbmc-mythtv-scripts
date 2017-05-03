@@ -220,6 +220,7 @@ my %check_table = (
 my @default_checks = qw(
     mythshutdown
     checklivetv
+    remote_mythtv
     nzbget
     ssh_sessions
     samba_sessions
