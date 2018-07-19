@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from dateutil.parser import parse
 import sys
 
-emby = EmbyRemote("ace5cea1a2124bd0ac6881ee2b25f0d8", "http://localhost:8096")
+emby = EmbyRemote("a61bf4428aa8435f96dd1da3e8923fa6", "http://localhost:8096")
 sessions = emby.get_sessions()
 
 for session in sessions:
