@@ -9,6 +9,9 @@ emby = EmbyRemote("a61bf4428aa8435f96dd1da3e8923fa6", "http://localhost:8096")
 sessions = emby.get_sessions()
 
 for session in sessions:
+    if session["DeviceName"] == "HomeAssistant":
+        continue
+    
     idlesecs = (datetime.now(timezone.utc) - parse(session["LastActivityDate"])).total_seconds()
     # print(session["DeviceName"], idlesecs)
     if idlesecs < 180:
