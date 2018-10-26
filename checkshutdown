@@ -121,6 +121,28 @@ my %check_table = (
         },
     },
 
+    airsonic => {
+        help => 'Check if airsonic is in use',
+        code => sub{
+            use JSON::XS qw( decode_json );
+            my $host = '127.0.0.1';
+            my $port = '4040/airsonic';
+            my $user = 'tom';
+            my $salt = 'ThisIsMySalt';
+            my $hash = '09670bd7d8afbe4f810a8e311e09dc82';
+            my $version = '1.15.0';
+
+            my $uri = "http://$host:$port/rest/getNowPlaying?u=$user&s=$salt&t=$hash&v=$version&c=status&f=json";
+	    my $raw_json = `curl -s '$uri'`;
+	    return "Could not connect to Airsonic" if (length ($raw_json) == 0);
+            my $status = decode_json($raw_json)->{'subsonic-response'};
+            return if (!$status->{nowPlaying} or !$status->{nowPlaying}->{entry});
+            for my $entry (@{$status->{nowPlaying}->{entry}}) {
+                return "Airsonic is in use" if $entry->{minutesAgo} < 10;
+            }
+            return;
+        },
+    },
 
     transmission => {
 	help => 'Check if transmission is busy',
@@ -225,6 +247,7 @@ my @default_checks = qw(
     ssh_sessions
     samba_sessions
     emby
+    airsonic
 );
 
 my $opt_ok = GetOptions(
