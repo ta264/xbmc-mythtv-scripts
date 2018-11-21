@@ -227,6 +227,15 @@ my %check_table = (
         },
     },
 
+    running_tasks => {
+        help => 'Check there are no tasks queued in task spooler',
+        code => sub {
+            my $linecount = `tsp -i | grep "Time running" | wc -l`;
+            return 'Tasks running in task spooler'
+                unless $linecount == 0;
+            return;
+        }
+    }
 );
 
 # my @default_checks = qw(
@@ -248,6 +257,7 @@ my @default_checks = qw(
     samba_sessions
     emby
     airsonic
+    running_tasks
 );
 
 my $opt_ok = GetOptions(
