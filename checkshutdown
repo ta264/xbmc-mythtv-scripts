@@ -230,6 +230,8 @@ my %check_table = (
     running_tasks => {
         help => 'Check there are no tasks queued in task spooler',
         code => sub {
+            my $jobcount = `tsp -l | wc -l`;
+            return if $jobcount == 1;
             my $linecount = `tsp -i | grep "Time running" | wc -l`;
             return 'Tasks running in task spooler'
                 unless $linecount == 0;
