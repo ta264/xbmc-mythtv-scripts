@@ -144,27 +144,6 @@ my %check_table = (
         },
     },
 
-    transmission => {
-	help => 'Check if transmission is busy',
-	code => sub {
-
-	    my $client = Transmission::Client->new;
-	    my $transmission_busy = 0;
-
-	    for my $torrent (@{ $client->torrents }) {
-		my $status = $torrent->status;
-		# if ($status >= 1 && $status <= 4) {
-		if ($status >= 1) {
-		    $transmission_busy = 1;
-		}
-	    }
-
-	    return 'Transmission is busy' if $transmission_busy;
-	    return;
-	},
-    },
-
-
     ssh_sessions => {
         help => 'Check for users logged in by ssh',
         code => sub {
@@ -241,25 +220,11 @@ my %check_table = (
     }
 );
 
-# my @default_checks = qw(
-#     apache
-#     console_user
-#     mythshutdown
-#     sabnzbd
-#     ssh_sessions
-#     uptime
-#     xbmc
-# );
-
 my @default_checks = qw(
-    mythshutdown
-    checklivetv
-    remote_mythtv
     nzbget
     ssh_sessions
     samba_sessions
     emby
-    airsonic
     running_tasks
 );
 
